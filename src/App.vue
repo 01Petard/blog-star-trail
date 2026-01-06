@@ -29,13 +29,17 @@ const data = reactive({
   }],
 
   myProjects: [{
-    name: 'RAG知识库应用',
-    description: 'AI志愿填报顾问',
-    link: 'https://www.codebox.icu:8888/',
+    name: '北京理工大学访客预约系统',
+    description: '比官方更好用的预约软件',
+    link: 'https://bit.bugstack.icu/',
   }, {
-    name: 'AI Hub',
-    description: 'AI应用中心',
-    link: 'https://www.codebox.icu:5173/',
+    name: 'What Is Your IPv4',
+    description: '黑客帝国风格的公网出口查询',
+    link: 'https://ip.bugstack.icu/',
+  }, {
+    name: '离下班还有多久',
+    description: '牛 马 一 定 要 休 息',
+    link: 'https://shutdown.bugstack.icu/',
   }, {
     name: 'Pintree收藏夹',
     description: '配置型个人收藏夹',
