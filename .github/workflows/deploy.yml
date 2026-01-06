@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main, master ]
 
-# 允许手动触发部署
+  # 允许手动触发部署
   workflow_dispatch:
 
 # 设置GITHUB_TOKEN的权限
@@ -17,7 +17,7 @@ permissions:
 
 # 确保只有一个部署作业同时运行
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -35,8 +35,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.14.0'
-          cache: 'pnpm'
+          node-version: 22.14.0
+          cache: pnpm
 
       - name: Get pnpm store directory
         shell: bash
@@ -63,7 +63,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
 
   deploy:
     environment:

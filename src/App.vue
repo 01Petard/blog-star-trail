@@ -1,7 +1,7 @@
 <script setup>
-import {onMounted, reactive} from 'vue'
-import StarTrails from './components/StarTrails.vue'
+import { onMounted, reactive } from 'vue'
 import MiniPlayer from '@/components/MiniPlayer.vue'
+import StarTrails from './components/StarTrails.vue'
 
 const data = reactive({
   titleList: [
@@ -90,22 +90,22 @@ onMounted(() => {
   <!-- 导航 -->
   <nav absolute fixed bottom-4 left-4 z-20>
     <div v-for="(item, index) in data.navLinks" :key="index" my-6 text-3 text-white wv>
-      <a :href="item.link" opacity-75 text-white tracking-widest hover:opacity-100>
+      <a :href="item.link" text-white tracking-widest opacity-75 hover:opacity-100>
         {{ item.name }}
       </a>
     </div>
   </nav>
 
   <!-- 主体 -->
-  <main bg-transparent absolute w-full top-75vh z-10>
+  <main absolute top-75vh z-10 w-full bg-transparent>
     <!-- 大标题 -->
-    <section ml-15vw absolute>
-      <div text-10 text-white font-bold tracking-widest v-html="data.titleList[Math.floor(Math.random() * data.titleList.length)]"/>
+    <section absolute ml-15vw>
+      <div text-10 text-white font-bold tracking-widest v-html="data.titleList[Math.floor(Math.random() * data.titleList.length)]" />
       <div flex items-center>
         <div mr-4 flex gap-2>
-          <div bg-red rounded-full h-3 w-3/>
-          <div bg-yellow rounded-full h-3 w-3/>
-          <div bg-green rounded-full h-3 w-3/>
+          <div h-3 w-3 rounded-full bg-red />
+          <div h-3 w-3 rounded-full bg-yellow />
+          <div h-3 w-3 rounded-full bg-green />
         </div>
         <div text-4 text-white tracking-widest>
           天天快乐
@@ -136,7 +136,7 @@ onMounted(() => {
             We're making the world a better place. Through constructing elegant hierarchies for maximum code reuse and extensibility.
           </p>
         </div>
-        <img hidden rounded-full h-25 w-25 transition md:block hover:-translate-y--2 :src="avatar" alt="avatar">
+        <img hidden h-25 w-25 rounded-full transition md:block hover:-translate-y--2 :src="avatar" alt="avatar">
       </div>
 
       <!-- 我的技能 -->
@@ -149,17 +149,17 @@ onMounted(() => {
       <div text-bold mb-2 ml-10 text-8 text-white>
         Projects
       </div>
-      <div grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 mx-10>
+      <div grid grid-cols-1 mx-10 mb-10 gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2>
         <div
           v-for="(item, index) in data.myProjects"
           :key="index"
         >
           <a :href="item.link">
-            <div class="bg-white/5 hover:bg-white/10" p-2 rounded-lg shadow-md flex-col transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2>
-              <div text-bold opacity-75 text-white>
+            <div class="bg-white/5 hover:bg-white/10" flex-col rounded-lg p-2 shadow-md transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2>
+              <div text-bold text-white opacity-75>
                 {{ item.name }}
               </div>
-              <div mt-1 opacity-50 text-3 text-white>
+              <div mt-1 text-3 text-white opacity-50>
                 {{ item.description }}
               </div>
             </div>
@@ -172,17 +172,17 @@ onMounted(() => {
       <div text-bold mb-2 ml-10 text-8 text-white>
         Blogs
       </div>
-      <div grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 mx-10>
+      <div grid grid-cols-1 mx-10 mb-10 gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2>
         <div
           v-for="(item, index) in data.myBlogs"
           :key="index"
         >
           <a :href="item.link">
-            <div class="bg-white/5 hover:bg-white/10" p-2 rounded-lg shadow-md flex-col transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2>
-              <div text-bold opacity-75 text-white>
+            <div class="bg-white/5 hover:bg-white/10" flex-col rounded-lg p-2 shadow-md transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2>
+              <div text-bold text-white opacity-75>
                 {{ item.name }}
               </div>
-              <div mt-1 opacity-50 text-3 text-white>
+              <div mt-1 text-3 text-white opacity-50>
                 {{ item.description }}
               </div>
             </div>
@@ -197,41 +197,43 @@ onMounted(() => {
       </div>
       <div flex flex-wrap justify-between>
         <div v-for="(item, index) in data.socialLinks" :key="index" mx-10 my-4 class="basis-1/4">
-          <a class="bg-white/5 hover:bg-white/10" p-2 rounded-lg shadow-md flex-col justify-between items-center transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100
-             hover:-translate-y-2 :href="item.link">
-            <div mb-1 text-white f-c-c v-html="item.icon"/>
-            <div text-bold opacity-75 text-white>{{ item.label }}</div>
+          <a
+            class="bg-white/5 hover:bg-white/10"
+            flex-col items-center justify-between rounded-lg p-2 shadow-md transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2 :href="item.link"
+          >
+            <div mb-1 f-c-c text-white v-html="item.icon" />
+            <div text-bold text-white opacity-75>{{ item.label }}</div>
           </a>
         </div>
       </div>
 
       <!--  左对齐    -->
-      <!--      &lt;!&ndash; Find Me &ndash;&gt;-->
-      <!--      <div text-bold mb-2 ml-10 text-8 text-white>-->
-      <!--        Find Me-->
-      <!--      </div>-->
-      <!--      <div grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mx-10 mb-10>-->
-      <!--        <div-->
-      <!--          v-for="(item, index) in data.socialLinks"-->
-      <!--          :key="index"-->
-      <!--        >-->
-      <!--          <a-->
-      <!--            :href="item.link"-->
-      <!--            class="flex flex-col items-center justify-between p-2 rounded-lg shadow-md bg-white/5 hover:bg-white/10 transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2"-->
-      <!--          >-->
-      <!--            <div class="mb-1 text-white f-c-c" v-html="item.icon"></div>-->
-      <!--            <div class="text-white text-sm font-bold opacity-75">{{ item.label }}</div>-->
-      <!--          </a>-->
-      <!--        </div>-->
-      <!--      </div>-->
-          </section>
+      <!--      &lt;!&ndash; Find Me &ndash;&gt; -->
+      <!--      <div text-bold mb-2 ml-10 text-8 text-white> -->
+      <!--        Find Me -->
+      <!--      </div> -->
+      <!--      <div grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mx-10 mb-10> -->
+      <!--        <div -->
+      <!--          v-for="(item, index) in data.socialLinks" -->
+      <!--          :key="index" -->
+      <!--        > -->
+      <!--          <a -->
+      <!--            :href="item.link" -->
+      <!--            class="flex flex-col items-center justify-between p-2 rounded-lg shadow-md bg-white/5 hover:bg-white/10 transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2" -->
+      <!--          > -->
+      <!--            <div class="mb-1 text-white f-c-c" v-html="item.icon"></div> -->
+      <!--            <div class="text-white text-sm font-bold opacity-75">{{ item.label }}</div> -->
+      <!--          </a> -->
+      <!--        </div> -->
+      <!--      </div> -->
+    </section>
 
     <!-- 底部 -->
     <footer mb-5>
       <div class="text-white/60" mt-50 f-c-c>
-        <i i-ant-design-environment-outlined mr-1/>
+        <i i-ant-design-environment-outlined mr-1 />
         <p>路虽远行则将至，事虽难做则必成</p>
-        <i i-ant-design-environment-outlined ml-1/>
+        <i i-ant-design-environment-outlined ml-1 />
       </div>
       <div class="text-white/60" mt-2 f-c-c gap-4>
         <div>
@@ -247,11 +249,11 @@ onMounted(() => {
   </main>
 
   <!-- 背景 -->
-  <div id="background" absolute wh-full left-0 top-0 z-0>
+  <div id="background" absolute left-0 top-0 z-0 wh-full>
     <!-- 渐变阴影 -->
-    <div to-black-500 absolute h-80vh w-full bottom--30vh left-0 from-black bg-gradient-to-t/>
+    <div to-black-500 absolute bottom--30vh left-0 h-80vh w-full from-black bg-gradient-to-t />
     <!-- 星轨背景 -->
-    <StarTrails pb-45vh bg-black/>
+    <StarTrails bg-black pb-45vh />
   </div>
 </template>
 
