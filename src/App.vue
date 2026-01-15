@@ -58,7 +58,7 @@ const data = reactive({
 
   socialLinks: [{
     icon: '<i i-ant-design-user-outlined />',
-    link: 'https://www.codebox.icu/',
+    link: 'https://www.bugstack.icu/',
     label: 'Star-Trail',
   }, {
     icon: '<i i-ant-design-github-outlined />',
@@ -71,7 +71,10 @@ const data = reactive({
   }],
 })
 
+// 两仪式
 const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202503221816953.png'
+// 双生视界
+// const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202601151736130.jpg'
 
 onMounted(() => {
   // 背景固定
