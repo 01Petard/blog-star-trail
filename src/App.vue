@@ -29,6 +29,10 @@ const data = reactive({
   }],
 
   myProjects: [{
+    name: '复古终端风格起始页',
+    description: '专注于提升效率和专注力的终端风格的仪表盘',
+    link: 'https://start.bugstack.icu/',
+  },{
     name: '北京理工大学访客预约系统',
     description: '比官方更好用的预约软件',
     link: 'https://bit.bugstack.icu/',
