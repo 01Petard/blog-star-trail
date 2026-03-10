@@ -29,6 +29,10 @@ const data = reactive({
   }],
 
   myProjects: [{
+    name: '哈基米加密解密工具',
+    description: '你还在为不会说曼波语而烦恼吗？快来试试哈基米加密解密工具吧！',
+    link: 'https://hajimi.bugstack.icu/',
+  }, {
     name: '粒子土星',
     description: '粒子特效模拟土星视觉效果',
     link: 'https://saturn.bugstack.icu/',
