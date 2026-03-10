@@ -29,10 +29,22 @@ const data = reactive({
   }],
 
   myProjects: [{
+    name: '粒子土星',
+    description: '粒子特效模拟土星视觉效果',
+    link: 'https://saturn.bugstack.icu/',
+  }, {
+    name: '手势捕捉',
+    description: '实时捕捉识别手部动作轨迹',
+    link: 'https://hand.bugstack.icu/',
+  }, {
+    name: '像素变形生成器',
+    description: '一键生成创意像素形变图',
+    link: 'https://pixel.bugstack.icu/',
+  }, {
     name: '复古终端风格起始页',
     description: '专注于提升效率和专注力的终端风格的仪表盘',
     link: 'https://start.bugstack.icu/',
-  },{
+  }, {
     name: '北京理工大学访客预约系统',
     description: '比官方更好用的预约软件',
     link: 'https://bit.bugstack.icu/',
