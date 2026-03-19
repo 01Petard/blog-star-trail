@@ -30,7 +30,7 @@ const data = reactive({
 
   myProjects: [{
     name: 'Agent智能管理平台',
-    description: '自定义个性化的机器人，提你打工吧！',
+    description: '自定义个性化的智能体，帮你打工吧！',
     link: 'https://github.com/01Petard/ai-agent-station-web/',
   }, {
     name: '哈基米加密解密工具',
