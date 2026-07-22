@@ -11,11 +11,57 @@ const isPlaying = ref(false)
 const currentTime = ref(0)
 const duration = ref(0)
 const volume = ref(0.4)
+const isPlayerVisible = ref(false)
 const progress = computed(() => duration.value ? currentTime.value / duration.value * 100 : 0)
 let removeEnableAudio
 let autoplayStarting = false
+let scrollFrame = 0
+let hidePlayerTimer = 0
+let lastScrollY = 0
+let handlePageScroll
+
+function hidePlayerLater() {
+  window.clearTimeout(hidePlayerTimer)
+  hidePlayerTimer = window.setTimeout(() => {
+    isPlayerVisible.value = false
+  }, 1400)
+}
+
+function holdPlayer() {
+  window.clearTimeout(hidePlayerTimer)
+}
+
+function revealPlayer() {
+  isPlayerVisible.value = true
+  holdPlayer()
+}
+
+function releasePlayer() {
+  if (isPlayerVisible.value)
+    hidePlayerLater()
+}
 
 onMounted(() => {
+  lastScrollY = Math.max(window.scrollY, 0)
+  handlePageScroll = () => {
+    cancelAnimationFrame(scrollFrame)
+    scrollFrame = requestAnimationFrame(() => {
+      const currentScrollY = Math.max(window.scrollY, 0)
+      const delta = currentScrollY - lastScrollY
+      lastScrollY = currentScrollY
+
+      if (delta > 2) {
+        isPlayerVisible.value = true
+        hidePlayerLater()
+      }
+      else if (delta < -2) {
+        window.clearTimeout(hidePlayerTimer)
+        isPlayerVisible.value = false
+      }
+    })
+  }
+  window.addEventListener('scroll', handlePageScroll, { passive: true })
+
   const enableAudio = () => {
     if (audioRef.value) {
       audioRef.value.muted = false
@@ -35,6 +81,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  cancelAnimationFrame(scrollFrame)
+  window.clearTimeout(hidePlayerTimer)
+  window.removeEventListener('scroll', handlePageScroll)
   removeEnableAudio?.()
 })
 
@@ -94,73 +143,104 @@ function syncPlaying() {
 </script>
 
 <template>
-  <div class="player-shell">
-    <button class="play-button" :aria-label="isPlaying ? '暂停' : '播放'" @click="togglePlay">
-      <svg v-if="!isPlaying" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" /></svg>
-      <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z" /></svg>
-    </button>
+  <div class="player-anchor" @pointerenter="revealPlayer" @pointerleave="releasePlayer">
+    <div
+      class="player-shell"
+      :class="{ 'is-visible': isPlayerVisible }"
+      @focusin="holdPlayer"
+      @focusout="releasePlayer"
+    >
+      <button class="play-button" :aria-label="isPlaying ? '暂停' : '播放'" @click="togglePlay">
+        <svg v-if="!isPlaying" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" /></svg>
+        <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z" /></svg>
+      </button>
 
-    <div class="track-info">
-      <div class="control-row">
-        <input
-          v-model="currentTime"
-          class="progress-range"
-          type="range"
-          min="0"
-          :max="duration"
-          step="0.1"
-          :style="{ '--progress': `${progress}%` }"
-          aria-label="播放进度"
-          @input="seek"
-        >
-        <div class="volume-control">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm11.5 3a3.5 3.5 0 0 0-1.5-2.87v5.74A3.5 3.5 0 0 0 15.5 12z" /></svg>
-          <input v-model="volume" type="range" min="0" max="1" step="0.01" aria-label="音量">
+      <div class="track-info">
+        <div class="control-row">
+          <input
+            v-model="currentTime"
+            class="progress-range"
+            type="range"
+            min="0"
+            :max="duration"
+            step="0.1"
+            :style="{ '--progress': `${progress}%` }"
+            aria-label="播放进度"
+            @input="seek"
+          >
+          <div class="volume-control">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm11.5 3a3.5 3.5 0 0 0-1.5-2.87v5.74A3.5 3.5 0 0 0 15.5 12z" /></svg>
+            <input v-model="volume" type="range" min="0" max="1" step="0.01" aria-label="音量">
+          </div>
         </div>
       </div>
-    </div>
 
-    <audio
-      ref="audioRef"
-      :src="src"
-      autoplay
-      muted
-      loop
-      @timeupdate="updateTime"
-      @canplay="initAudio"
-      @loadedmetadata="initAudio"
-      @play="syncPlaying"
-      @pause="syncPlaying"
-    />
+      <audio
+        ref="audioRef"
+        :src="src"
+        autoplay
+        muted
+        loop
+        @timeupdate="updateTime"
+        @canplay="initAudio"
+        @loadedmetadata="initAudio"
+        @play="syncPlaying"
+        @pause="syncPlaying"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
-.player-shell {
+.player-anchor {
   position: fixed;
   z-index: 50;
-  right: 1.25rem;
+  right: auto;
   bottom: 1.25rem;
+  left: 5rem;
+  width: min(15.5rem, calc(100vw - 5rem));
+}
+
+.player-shell {
+  position: relative;
   display: flex;
   align-items: center;
-  width: min(18rem, calc(100vw - 5rem));
-  gap: 0.6rem;
-  padding: 0.55rem 0.65rem;
+  width: 100%;
+  gap: 0.45rem;
+  padding: 0.42rem 0.5rem;
   overflow: hidden;
   color: rgba(241, 247, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0.75rem;
-  background: rgba(8, 10, 20, 0.68);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
-  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 7px 20px rgba(18, 14, 32, 0.2);
+  backdrop-filter: blur(24px) saturate(1.16);
+  -webkit-backdrop-filter: blur(24px) saturate(1.16);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, 0.65rem, 0) scale(0.98);
+  transition:
+    opacity 260ms ease,
+    visibility 0s linear 320ms,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.player-shell.is-visible,
+.player-anchor:hover .player-shell {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition-delay: 0s;
 }
 
 .play-button {
   position: relative;
   z-index: 1;
   display: grid;
-  flex: 0 0 1.8rem;
-  height: 1.8rem;
+  flex: 0 0 1.55rem;
+  height: 1.55rem;
   padding: 0;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -179,7 +259,7 @@ function syncPlaying() {
 }
 
 .play-button svg {
-  width: 0.78rem;
+  width: 0.66rem;
   fill: currentColor;
 }
 
@@ -213,7 +293,7 @@ input[type='range'] {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 0.6rem;
+  gap: 0.45rem;
 }
 
 .volume-control {
@@ -221,25 +301,27 @@ input[type='range'] {
   z-index: 1;
   display: flex;
   align-items: center;
-  flex: 0 0 4.2rem;
-  width: 4.2rem;
-  gap: 0.35rem;
+  flex: 0 0 3.65rem;
+  width: 3.65rem;
+  gap: 0.28rem;
 }
 
 .volume-control svg {
-  width: 0.9rem;
+  width: 0.75rem;
   flex: none;
   fill: rgba(221, 238, 255, 0.66);
 }
 
 .volume-control input {
-  width: 2.8rem;
+  width: 2.45rem;
 }
 
 @media (max-width: 640px) {
-  .player-shell {
-    right: 0.75rem;
+  .player-anchor {
+    right: auto;
     bottom: 0.75rem;
+    left: 3.75rem;
+    width: min(11.5rem, calc(100vw - 4.5rem));
   }
 
   .volume-control {
