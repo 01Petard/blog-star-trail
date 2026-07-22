@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, reactive} from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import MiniPlayer from '@/components/MiniPlayer.vue'
 import StarTrails from './components/StarTrails.vue'
 
@@ -104,16 +104,43 @@ const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202503221
 // 双生视界
 // const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202601151736130.jpg'
 
+let frameId = 0
+let handleScroll
+let reunionObserver
+const reunionScene = ref(null)
+const reunionVisible = ref(false)
+
 onMounted(() => {
-  // 背景固定
-  window.addEventListener('scroll', () => {
-    const bg = document.getElementById('background')
-    const scrollTop = window.scrollY
-    if (scrollTop > 0.7 * window.innerHeight)
-      bg.classList.add('fixed')
-    else
-      bg.classList.remove('fixed')
-  })
+  const background = document.getElementById('background')
+  handleScroll = () => {
+    cancelAnimationFrame(frameId)
+    frameId = requestAnimationFrame(() => {
+      const progress = Math.min(window.scrollY / (window.innerHeight * 1.15), 1)
+      background.style.setProperty('--scroll-progress', progress)
+    })
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
+
+  if ('IntersectionObserver' in window) {
+    reunionObserver = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting)
+        return
+
+      reunionVisible.value = true
+      reunionObserver.disconnect()
+    }, { threshold: 0.12 })
+    reunionObserver.observe(reunionScene.value)
+  }
+  else {
+    reunionVisible.value = true
+  }
+})
+
+onUnmounted(() => {
+  cancelAnimationFrame(frameId)
+  window.removeEventListener('scroll', handleScroll)
+  reunionObserver?.disconnect()
 })
 </script>
 
@@ -131,7 +158,7 @@ onMounted(() => {
   <main absolute top-75vh z-10 w-full bg-transparent>
     <!-- 大标题 -->
     <section absolute ml-15vw>
-      <div text-10 text-white font-bold tracking-widest v-html="data.titleList[Math.floor(Math.random() * data.titleList.length)]" />
+      <div class="hero-title" text-10 text-white font-bold tracking-widest v-html="data.titleList[Math.floor(Math.random() * data.titleList.length)]" />
       <div flex items-center>
         <div mr-4 flex gap-2>
           <div h-3 w-3 rounded-full bg-red />
@@ -184,13 +211,18 @@ onMounted(() => {
         <div
           v-for="(item, index) in data.myProjects"
           :key="index"
+          class="project-item"
         >
-          <a :href="item.link">
-            <div class="bg-white/5 hover:bg-white/10" flex-col rounded-lg p-2 shadow-md transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2>
-              <div text-bold text-white opacity-75>
+          <a class="project-link" :href="item.link">
+            <div
+              class="project-card bg-white/5 hover:bg-white/10"
+              flex-col rounded-lg p-2 shadow-md transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2
+              :title="`${item.name}\n${item.description}`"
+            >
+              <div class="project-title" text-bold text-white opacity-75>
                 {{ item.name }}
               </div>
-              <div mt-1 text-3 text-white opacity-50>
+              <div class="project-description" mt-1 text-3 text-white opacity-50>
                 {{ item.description }}
               </div>
             </div>
@@ -259,38 +291,220 @@ onMounted(() => {
       <!--      </div> -->
     </section>
 
-    <!-- 底部 -->
-    <footer mb-5>
-      <div class="text-white/60" mt-50 f-c-c>
-        <i i-ant-design-environment-outlined mr-1 />
-        <p>路虽远行则将至，事虽难做则必成</p>
-        <i i-ant-design-environment-outlined ml-1 />
-      </div>
-      <div class="text-white/60" mt-2 f-c-c gap-4>
-        <div>
-          <a href="https://beian.miit.gov.cn/" style="color: #999999" target="_blank">
-            浙ICP备2024084383号
-          </a>
+    <!-- 黄昏相遇与页脚 -->
+    <section class="reunion-footer">
+      <figure
+        ref="reunionScene"
+        class="reunion-scene"
+        :class="{ 'is-visible': reunionVisible }"
+        aria-label="黄昏中相见的两个人"
+      >
+        <img
+          src="/yourname.avif"
+          alt="黄昏中隔着霞光伸手相见的两个人"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+
+      <footer class="site-footer">
+        <div class="text-white/60" f-c-c>
+          <i i-ant-design-environment-outlined mr-1 />
+          <p>路虽远行则将至，事虽难做则必成</p>
+          <i i-ant-design-environment-outlined ml-1 />
         </div>
-        <div>
-          ©2025 小黄同学
+        <div class="text-white/60" mt-1 f-c-c gap-3>
+          <div>
+            <a href="https://beian.miit.gov.cn/" target="_blank">
+              浙ICP备2024084383号
+            </a>
+          </div>
+          <div>
+            ©2025 小黄同学
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </section>
   </main>
 
   <!-- 背景 -->
-  <div id="background" absolute left-0 top-0 z-0 wh-full>
-    <!-- 渐变阴影 -->
-    <div to-black-500 absolute bottom--30vh left-0 h-80vh w-full from-black bg-gradient-to-t />
+  <div id="background" absolute left-0 top-0 z-0 h-130vh w-full>
+    <div class="dusk-haze" />
     <!-- 星轨背景 -->
     <StarTrails bg-black pb-45vh />
   </div>
 </template>
 
 <style lang="scss" scoped>
+.hero-title {
+  text-shadow: 0 3px 28px rgba(159, 177, 255, 0.3);
+}
+
+.project-item,
+.project-link {
+  display: block;
+  height: 100%;
+}
+
+.project-card {
+  height: 4.75rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.project-title,
+.project-description {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.reunion-footer {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(2rem, 5vw, 5rem);
+}
+
+.site-footer {
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(0.4rem, 1vw, 0.75rem);
+  left: 50%;
+  width: max-content;
+  max-width: 94vw;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: clamp(0.62rem, 0.78vw, 0.75rem);
+  line-height: 1.35;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(15, 12, 25, 0.72);
+  transform: translateX(-50%);
+}
+
+.site-footer a {
+  color: inherit;
+}
+
+.reunion-scene {
+  position: relative;
+  width: 100%;
+  height: clamp(90px, 10.42vw, 200px);
+  margin-top: 0;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0;
+  filter: blur(6px) saturate(0.82);
+  transform: translate3d(0, 48px, 0) scale(0.985);
+  transition:
+    opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.4s ease-out,
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  contain: layout paint;
+}
+
+.reunion-scene.is-visible {
+  opacity: 1;
+  filter: blur(0) saturate(0.9);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.reunion-scene img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.16) 12%,
+    rgba(0, 0, 0, 0.48) 28%,
+    rgba(0, 0, 0, 0.82) 32%,
+    #000 44%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.16) 12%,
+    rgba(0, 0, 0, 0.48) 28%,
+    rgba(0, 0, 0, 0.82) 32%,
+    #000 44%,
+    #000 100%
+  );
+}
+
+.reunion-scene.is-visible img {
+  animation: reunion-float 11s ease-in-out 1.8s infinite;
+}
+
+@keyframes reunion-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
 #background.fixed {
+  position: absolute;
+}
+
+#background {
+  --scroll-progress: 0;
   position: fixed;
-  top: -70%;
+  height: 145vh;
+  transform: translate3d(0, calc(var(--scroll-progress) * -38vh), 0);
+  will-change: transform;
+}
+
+.dusk-haze {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 72% 72%, rgba(255, 205, 169, 0.62), transparent 36%),
+    radial-gradient(ellipse at 28% 66%, rgba(225, 142, 187, 0.4), transparent 44%),
+    radial-gradient(ellipse at 50% 92%, rgba(247, 151, 132, 0.46), transparent 54%),
+    linear-gradient(
+      to bottom,
+      rgba(41, 84, 145, 0.2) 8%,
+      rgba(110, 92, 169, 0.34) 40%,
+      rgba(207, 126, 173, 0.5) 62%,
+      rgba(239, 144, 151, 0.56) 78%,
+      rgba(252, 177, 143, 0.42) 100%
+    );
+  opacity: calc(var(--scroll-progress) * 0.82);
+  pointer-events: none;
+}
+
+.dusk-haze::after {
+  position: absolute;
+  right: -8%;
+  bottom: 20%;
+  left: -8%;
+  height: 17%;
+  background:
+    radial-gradient(ellipse at 18% 70%, rgba(255, 238, 222, 0.25), transparent 28%),
+    radial-gradient(ellipse at 63% 55%, rgba(255, 225, 213, 0.2), transparent 34%);
+  filter: blur(22px);
+  content: '';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reunion-scene,
+  .reunion-scene.is-visible {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .reunion-scene.is-visible img {
+    animation: none;
+  }
 }
 </style>
