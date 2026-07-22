@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
+import {onMounted, reactive} from 'vue'
 import MiniPlayer from '@/components/MiniPlayer.vue'
 import StarTrails from './components/StarTrails.vue'
 
@@ -29,6 +29,10 @@ const data = reactive({
   }],
 
   myProjects: [{
+    name: 'Wi-Fi 设备分析器',
+    description: '看看谁在你的 Wi-Fi 网络里',
+    link: 'https://wifi-device-inspector.vercel.app/',
+  }, {
     name: 'Agent智能管理平台',
     description: '自定义个性化的智能体，帮你打工吧！',
     link: 'https://github.com/01Petard/ai-agent-station-web/',
