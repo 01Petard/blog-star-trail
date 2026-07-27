@@ -1,5 +1,12 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import {onMounted, onUnmounted, ref} from 'vue'
+
+const props = defineProps({
+  showComet: {
+    type: Boolean,
+    default: true,
+  },
+})
 
 const skyRef = ref(null)
 const starCanvasRef = ref(null)
@@ -426,8 +433,10 @@ onMounted(() => {
     const delta = Math.min(time - lastTime || 16, 50)
     lastTime = time
     context.clearRect(0, 0, width, height)
-    drawDynamicStars(time - startTime)
-    drawMeteor(time - startTime, delta)
+    if (props.showComet) {
+      drawDynamicStars(time - startTime)
+      drawMeteor(time - startTime, delta)
+    }
 
     if (!reduceMotion && !document.hidden)
       frameId = requestAnimationFrame(render)

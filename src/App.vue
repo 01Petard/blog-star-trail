@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import MiniPlayer from '@/components/MiniPlayer.vue'
+import { siteConfig } from '@/config'
 import StarTrails from './components/StarTrails.vue'
 
 const data = reactive({
@@ -331,7 +332,7 @@ onUnmounted(() => {
   <div id="background" absolute left-0 top-0 z-0 h-130vh w-full>
     <div class="dusk-haze" />
     <!-- 星轨背景 -->
-    <StarTrails bg-black pb-45vh />
+    <StarTrails :show-comet="siteConfig.effects.comet" bg-black pb-45vh />
   </div>
 </template>
 
