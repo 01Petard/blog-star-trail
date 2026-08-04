@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import {onMounted, onUnmounted, reactive, ref} from 'vue'
 import MiniPlayer from '@/components/MiniPlayer.vue'
-import { siteConfig } from '@/config'
+import {siteConfig} from '@/config'
 import StarTrails from './components/StarTrails.vue'
 
 const data = reactive({
@@ -30,6 +30,10 @@ const data = reactive({
   }],
 
   myProjects: [{
+    name: '形轨',
+    description: '记录身体变化，看见习惯的影响',
+    link: 'https://fit.bugstack.icu/',
+  }, {
     name: 'Wi-Fi 设备分析器',
     description: '看看谁在你的 Wi-Fi 网络里',
     link: 'https://wifi-device-inspector.vercel.app/',
@@ -120,7 +124,7 @@ onMounted(() => {
       background.style.setProperty('--scroll-progress', progress)
     })
   }
-  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('scroll', handleScroll, {passive: true})
   handleScroll()
 
   if ('IntersectionObserver' in window) {
@@ -130,10 +134,9 @@ onMounted(() => {
 
       reunionVisible.value = true
       reunionObserver.disconnect()
-    }, { threshold: 0.12 })
+    }, {threshold: 0.12})
     reunionObserver.observe(reunionScene.value)
-  }
-  else {
+  } else {
     reunionVisible.value = true
   }
 })
@@ -159,12 +162,12 @@ onUnmounted(() => {
   <main absolute top-75vh z-10 w-full bg-transparent>
     <!-- 大标题 -->
     <section absolute ml-15vw>
-      <div class="hero-title" text-10 text-white font-bold tracking-widest v-html="data.titleList[Math.floor(Math.random() * data.titleList.length)]" />
+      <div class="hero-title" text-10 text-white font-bold tracking-widest v-html="data.titleList[Math.floor(Math.random() * data.titleList.length)]"/>
       <div flex items-center>
         <div mr-4 flex gap-2>
-          <div h-3 w-3 rounded-full bg-red />
-          <div h-3 w-3 rounded-full bg-yellow />
-          <div h-3 w-3 rounded-full bg-green />
+          <div h-3 w-3 rounded-full bg-red/>
+          <div h-3 w-3 rounded-full bg-yellow/>
+          <div h-3 w-3 rounded-full bg-green/>
         </div>
         <div text-4 text-white tracking-widest>
           天天快乐
@@ -178,7 +181,7 @@ onUnmounted(() => {
         About Me
       </div>
       <div>
-        <MiniPlayer src="/mengdenglong.mp3" title="梦灯笼" />
+        <MiniPlayer src="/mengdenglong.mp3" title="梦灯笼"/>
       </div>
       <div mx-10 mb-10 flex justify-between>
         <div class="text-white/80">
@@ -265,7 +268,7 @@ onUnmounted(() => {
             class="bg-white/5 hover:bg-white/10"
             flex-col items-center justify-between rounded-lg p-2 shadow-md transition backdrop-blur-3xl backdrop-opacity-60 hover:backdrop-opacity-100 hover:-translate-y-2 :href="item.link"
           >
-            <div mb-1 f-c-c text-white v-html="item.icon" />
+            <div mb-1 f-c-c text-white v-html="item.icon"/>
             <div text-bold text-white opacity-75>{{ item.label }}</div>
           </a>
         </div>
@@ -310,9 +313,9 @@ onUnmounted(() => {
 
       <footer class="site-footer">
         <div class="text-white/60" f-c-c>
-          <i i-ant-design-environment-outlined mr-1 />
+          <i i-ant-design-environment-outlined mr-1/>
           <p>路虽远行则将至，事虽难做则必成</p>
-          <i i-ant-design-environment-outlined ml-1 />
+          <i i-ant-design-environment-outlined ml-1/>
         </div>
         <div class="text-white/60" mt-1 f-c-c gap-3>
           <div>
@@ -330,9 +333,9 @@ onUnmounted(() => {
 
   <!-- 背景 -->
   <div id="background" absolute left-0 top-0 z-0 h-130vh w-full>
-    <div class="dusk-haze" />
+    <div class="dusk-haze"/>
     <!-- 星轨背景 -->
-    <StarTrails :show-comet="siteConfig.effects.comet" bg-black pb-45vh />
+    <StarTrails :show-comet="siteConfig.effects.comet" bg-black pb-45vh/>
   </div>
 </template>
 
@@ -395,10 +398,9 @@ onUnmounted(() => {
   opacity: 0;
   filter: blur(6px) saturate(0.82);
   transform: translate3d(0, 48px, 0) scale(0.985);
-  transition:
-    opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1.4s ease-out,
-    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+  filter 1.4s ease-out,
+  transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
   contain: layout paint;
 }
 
@@ -416,22 +418,22 @@ onUnmounted(() => {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.16) 12%,
-    rgba(0, 0, 0, 0.48) 28%,
-    rgba(0, 0, 0, 0.82) 32%,
-    #000 44%,
-    #000 100%
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.16) 12%,
+      rgba(0, 0, 0, 0.48) 28%,
+      rgba(0, 0, 0, 0.82) 32%,
+      #000 44%,
+      #000 100%
   );
   mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.16) 12%,
-    rgba(0, 0, 0, 0.48) 28%,
-    rgba(0, 0, 0, 0.82) 32%,
-    #000 44%,
-    #000 100%
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.16) 12%,
+      rgba(0, 0, 0, 0.48) 28%,
+      rgba(0, 0, 0, 0.82) 32%,
+      #000 44%,
+      #000 100%
   );
 }
 
@@ -466,18 +468,17 @@ onUnmounted(() => {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 72% 72%, rgba(255, 205, 169, 0.62), transparent 36%),
-    radial-gradient(ellipse at 28% 66%, rgba(225, 142, 187, 0.4), transparent 44%),
-    radial-gradient(ellipse at 50% 92%, rgba(247, 151, 132, 0.46), transparent 54%),
-    linear-gradient(
+  background: radial-gradient(ellipse at 72% 72%, rgba(255, 205, 169, 0.62), transparent 36%),
+  radial-gradient(ellipse at 28% 66%, rgba(225, 142, 187, 0.4), transparent 44%),
+  radial-gradient(ellipse at 50% 92%, rgba(247, 151, 132, 0.46), transparent 54%),
+  linear-gradient(
       to bottom,
       rgba(41, 84, 145, 0.2) 8%,
       rgba(110, 92, 169, 0.34) 40%,
       rgba(207, 126, 173, 0.5) 62%,
       rgba(239, 144, 151, 0.56) 78%,
       rgba(252, 177, 143, 0.42) 100%
-    );
+  );
   opacity: calc(var(--scroll-progress) * 0.82);
   pointer-events: none;
 }
@@ -488,9 +489,8 @@ onUnmounted(() => {
   bottom: 20%;
   left: -8%;
   height: 17%;
-  background:
-    radial-gradient(ellipse at 18% 70%, rgba(255, 238, 222, 0.25), transparent 28%),
-    radial-gradient(ellipse at 63% 55%, rgba(255, 225, 213, 0.2), transparent 34%);
+  background: radial-gradient(ellipse at 18% 70%, rgba(255, 238, 222, 0.25), transparent 28%),
+  radial-gradient(ellipse at 63% 55%, rgba(255, 225, 213, 0.2), transparent 34%);
   filter: blur(22px);
   content: '';
 }

@@ -195,10 +195,10 @@ function syncPlaying() {
 .player-anchor {
   position: fixed;
   z-index: 50;
-  right: auto;
-  bottom: 1.25rem;
-  left: 5rem;
-  width: min(15.5rem, calc(100vw - 5rem));
+  right: clamp(1.25rem, 7.5vw, 9.5rem);
+  bottom: clamp(4.75rem, 5.5vw, 6.5rem);
+  left: auto;
+  width: min(15.5rem, calc(100vw - 2.5rem));
 }
 
 .player-shell {
@@ -318,10 +318,10 @@ input[type='range'] {
 
 @media (max-width: 640px) {
   .player-anchor {
-    right: auto;
-    bottom: 0.75rem;
-    left: 3.75rem;
-    width: min(11.5rem, calc(100vw - 4.5rem));
+    right: 1rem;
+    bottom: 4.25rem;
+    left: auto;
+    width: min(11.5rem, calc(100vw - 2rem));
   }
 
   .volume-control {
