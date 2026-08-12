@@ -29,55 +29,73 @@ const data = reactive({
     link: 'https://01petard.github.io/messageboard/',
   }],
 
-  myProjects: [{
-    name: '形轨',
-    description: '记录身体变化，看见习惯的影响',
-    link: 'https://fit.bugstack.icu/',
-  }, {
-    name: 'Wi-Fi 设备分析器',
-    description: '看看谁在你的 Wi-Fi 网络里',
-    link: 'https://wifi-device-inspector.vercel.app/',
-  }, {
-    name: 'Agent智能管理平台',
-    description: '自定义个性化的智能体，帮你打工吧！',
-    link: 'https://github.com/01Petard/ai-agent-station-web/',
-  }, {
-    name: '哈基米加密解密工具',
-    description: '你还在为不会说曼波语而烦恼吗？快来试试哈基米加密解密工具吧！',
-    link: 'https://hajimi.bugstack.icu/',
-  }, {
-    name: '粒子土星',
-    description: '粒子特效模拟土星视觉效果',
-    link: 'https://saturn.bugstack.icu/',
-  }, {
-    name: '手势捕捉',
-    description: '实时捕捉识别手部动作轨迹',
-    link: 'https://hand.bugstack.icu/',
-  }, {
-    name: '像素变形生成器',
-    description: '一键生成创意像素形变图',
-    link: 'https://pixel.bugstack.icu/',
-  }, {
-    name: '复古终端风格起始页',
-    description: '专注于提升效率和专注力的终端风格的仪表盘',
-    link: 'https://start.bugstack.icu/',
-  }, {
-    name: '北京理工大学访客预约系统',
-    description: '比官方更好用的预约软件',
-    link: 'https://bit.bugstack.icu/',
-  }, {
-    name: 'What Is Your IPv4',
-    description: '黑客帝国风格的公网出口查询',
-    link: 'https://ip.bugstack.icu/',
-  }, {
-    name: '离下班还有多久',
-    description: '牛 马 一 定 要 休 息',
-    link: 'https://shutdown.bugstack.icu/',
-  }, {
-    name: 'Pintree收藏夹',
-    description: '配置型个人收藏夹',
-    link: 'https://01petard.github.io/Pintree-fav/',
-  }],
+  myProjects: [
+    {
+      name: '浏览器扩展 - Autofill 智填',
+      description: '基于大语言模型的智能表单填充浏览器扩展',
+      link: 'https://github.com/01Petard/Autofill/',
+    },
+    {
+      name: 'TrackFit 形轨',
+      description: '记录身体变化，看见习惯的影响',
+      link: 'https://fit.bugstack.icu/',
+    },
+    // {
+    //   name: 'Wi-Fi 设备分析器',
+    //   description: '看看谁在你的 Wi-Fi 网络里',
+    //   link: 'https://wifi-device-inspector.vercel.app/',
+    // },
+    {
+      name: 'Agent智能管理平台',
+      description: '自定义个性化的智能体，帮你打工吧！',
+      link: 'https://github.com/01Petard/ai-agent-station-web/',
+    },
+    {
+      name: '哈基米加密解密工具',
+      description: '你还在为不会说曼波语而烦恼吗？快来试试哈基米加密解密工具吧！',
+      link: 'https://hajimi.bugstack.icu/',
+    },
+    {
+      name: '粒子土星',
+      description: '粒子特效模拟土星视觉效果',
+      link: 'https://saturn.bugstack.icu/',
+    },
+    {
+      name: '手势捕捉',
+      description: '实时捕捉识别手部动作轨迹',
+      link: 'https://hand.bugstack.icu/',
+    },
+    {
+      name: '像素变形生成器',
+      description: '一键生成创意像素形变图',
+      link: 'https://pixel.bugstack.icu/',
+    },
+    {
+      name: '复古终端风格起始页',
+      description: '专注于提升效率和专注力的终端风格的仪表盘',
+      link: 'https://start.bugstack.icu/',
+    },
+    {
+      name: '北京理工大学访客预约系统',
+      description: '比官方更好用的预约软件',
+      link: 'https://bit.bugstack.icu/',
+    },
+    {
+      name: 'What Is Your IPv4',
+      description: '黑客帝国风格的公网出口查询',
+      link: 'https://ip.bugstack.icu/',
+    },
+    {
+      name: '离下班还有多久',
+      description: '牛 马 一 定 要 休 息',
+      link: 'https://shutdown.bugstack.icu/',
+    },
+    {
+      name: 'Pintree收藏夹',
+      description: '配置型个人收藏夹',
+      link: 'https://01petard.github.io/Pintree-fav/',
+    }
+  ],
 
   myBlogs: [{
     name: '代码港湾',
@@ -105,9 +123,9 @@ const data = reactive({
 })
 
 // 两仪式
-const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202503221816953.png'
+// const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202503221816953.png'
 // 双生视界
-// const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202601151736130.jpg'
+const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202601151736130.jpg'
 
 let frameId = 0
 let handleScroll
