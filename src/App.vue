@@ -124,7 +124,7 @@ const data = reactive({
 
 // 两仪式
 // const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202503221816953.png'
-// 双生视界
+// 阿尼娅·容格
 const avatar = 'https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202601151736130.jpg'
 
 let frameId = 0
@@ -216,7 +216,7 @@ onUnmounted(() => {
             We're making the world a better place. Through constructing elegant hierarchies for maximum code reuse and extensibility.
           </p>
         </div>
-        <img hidden h-25 w-25 rounded-full transition md:block hover:-translate-y--2 :src="avatar" alt="avatar">
+        <a href="https://github.com/01Petard" target="_blank" class="inline-block cursor-pointer"><img hidden h-25 w-25 rounded-full transition md:block hover:-translate-y-2 :src="avatar" alt="avatar"></a>
       </div>
 
       <!-- 我的技能 -->
