@@ -38,13 +38,8 @@ const data = reactive({
     {
       name: 'TrackFit 形轨',
       description: '记录身体变化，看见习惯的影响',
-      link: 'https://fit.bugstack.icu/',
+      link: 'https://fit.bugstack.top/',
     },
-    // {
-    //   name: 'Wi-Fi 设备分析器',
-    //   description: '看看谁在你的 Wi-Fi 网络里',
-    //   link: 'https://wifi-device-inspector.vercel.app/',
-    // },
     {
       name: 'Agent智能管理平台',
       description: '自定义个性化的智能体，帮你打工吧！',
@@ -53,47 +48,47 @@ const data = reactive({
     {
       name: '哈基米加密解密工具',
       description: '你还在为不会说曼波语而烦恼吗？快来试试哈基米加密解密工具吧！',
-      link: 'https://hajimi.bugstack.icu/',
+      link: 'https://hajimi.bugstack.top/',
     },
     {
       name: '粒子土星',
       description: '粒子特效模拟土星视觉效果',
-      link: 'https://saturn.bugstack.icu/',
+      link: 'https://saturn.bugstack.top/',
     },
     {
       name: '手势捕捉',
       description: '实时捕捉识别手部动作轨迹',
-      link: 'https://hand.bugstack.icu/',
+      link: 'https://hand.bugstack.top/',
     },
     {
       name: '像素变形生成器',
       description: '一键生成创意像素形变图',
-      link: 'https://pixel.bugstack.icu/',
+      link: 'https://pixel.bugstack.top/',
     },
     {
       name: '复古终端风格起始页',
       description: '专注于提升效率和专注力的终端风格的仪表盘',
-      link: 'https://start.bugstack.icu/',
+      link: 'https://start.bugstack.top/',
     },
     {
       name: '北京理工大学访客预约系统',
       description: '比官方更好用的预约软件',
-      link: 'https://bit.bugstack.icu/',
+      link: 'https://bit.bugstack.top/',
     },
     {
       name: 'What Is Your IPv4',
       description: '黑客帝国风格的公网出口查询',
-      link: 'https://ip.bugstack.icu/',
+      link: 'https://ip.bugstack.top/',
     },
     {
       name: '离下班还有多久',
       description: '牛 马 一 定 要 休 息',
-      link: 'https://shutdown.bugstack.icu/',
+      link: 'https://shutdown.bugstack.top/',
     },
     {
       name: 'Pintree收藏夹',
       description: '配置型个人收藏夹',
-      link: 'https://01petard.github.io/Pintree-fav/',
+      link: 'https://fav.bugstack.top/',
     }
   ],
 
@@ -109,7 +104,7 @@ const data = reactive({
 
   socialLinks: [{
     icon: '<i i-ant-design-user-outlined />',
-    link: 'https://www.bugstack.icu/',
+    link: 'https://www.bugstack.top/',
     label: 'Star-Trail',
   }, {
     icon: '<i i-ant-design-github-outlined />',
