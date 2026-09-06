@@ -31,6 +31,11 @@ const data = reactive({
 
   myProjects: [
     {
+      name: '仿 ChatGPT 应用',
+      description: '支持大部分的AI应用功能，但是不公开，你得自己部署',
+      link: 'https://chat.bugstack.top/',
+    },
+    {
       name: '浏览器扩展 - Autofill 智填',
       description: '基于大语言模型的智能表单填充浏览器扩展',
       link: 'https://github.com/01Petard/Autofill/',
