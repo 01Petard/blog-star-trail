@@ -31,7 +31,12 @@ const data = reactive({
 
   myProjects: [
     {
-      name: '仿 ChatGPT 应用',
+      name: 'E-Hentai Fetcher',
+      description: '一个提供 E-Hentai 图库搜索与浏览的代理工具',
+      link: 'https://e-fetcher.bugstack.top/',
+    },
+    {
+      name: '在线 Agent 演示项目',
       description: '支持大部分的AI应用功能，但是不公开，你得自己部署',
       link: 'https://chat.bugstack.top/',
     },
