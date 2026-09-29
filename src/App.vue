@@ -31,7 +31,7 @@ const data = reactive({
 
   myProjects: [
     {
-      name: 'E-Hentai Fetcher',
+      name: 'Gallery Lens',
       description: '面向 E-Hentai / ExHentai 的第三方图库客户端与替代前端',
       link: 'https://e-gallery.bugstack.top/',
     },
