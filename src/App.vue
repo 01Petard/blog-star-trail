@@ -32,8 +32,8 @@ const data = reactive({
   myProjects: [
     {
       name: 'E-Hentai Fetcher',
-      description: '一个提供 E-Hentai 图库搜索与浏览的代理工具',
-      link: 'https://e-fetcher.bugstack.top/',
+      description: '面向 E-Hentai / ExHentai 的第三方图库客户端与替代前端',
+      link: 'https://e-gallery.bugstack.top/',
     },
     {
       name: '在线 Agent 演示项目',
