@@ -31,7 +31,12 @@ const data = reactive({
 
   myProjects: [
     {
-      name: 'Gallery Lens',
+      name: '代码时光机',
+      description: '每一个仓库，都记录着一段开发旅程',
+      link: 'https://repo.bugstack.top/',
+    },
+    {
+      name: 'Gallery Lens - Ehentai内容抓取',
       description: '面向 E-Hentai / ExHentai 的第三方图库客户端与替代前端',
       link: 'https://e-gallery.bugstack.top/',
     },
@@ -41,7 +46,7 @@ const data = reactive({
       link: 'https://chat.bugstack.top/',
     },
     {
-      name: '浏览器扩展 - Autofill 智填',
+      name: '浏览器扩展 - Autofill',
       description: '基于大语言模型的智能表单填充浏览器扩展',
       link: 'https://github.com/01Petard/Autofill/',
     },
@@ -86,7 +91,7 @@ const data = reactive({
       link: 'https://bit.bugstack.top/',
     },
     {
-      name: 'What Is Your IPv4',
+      name: 'What Is Your IPv4 - 查询IP出口',
       description: '黑客帝国风格的公网出口查询',
       link: 'https://ip.bugstack.top/',
     },
