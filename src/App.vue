@@ -31,13 +31,18 @@ const data = reactive({
 
   myProjects: [
     {
-      name: '代码时光机',
+      name: '浏览器插件 - FocusMask',
+      description: '网页媒体信息屏蔽插件',
+      link: 'https://github.com/01Petard/FocusMask/',
+    },
+    {
+      name: 'RepoTime - 代码时光机',
       description: '每一个仓库，都记录着一段开发旅程',
       link: 'https://repo.bugstack.top/',
     },
     {
-      name: 'Gallery Lens - Ehentai内容抓取',
-      description: '面向 E-Hentai / ExHentai 的第三方图库客户端与替代前端',
+      name: 'Gallery Lens - 内容替代客户端',
+      description: '提供更便捷的 E-Hentai 搜索与浏览体验',
       link: 'https://e-gallery.bugstack.top/',
     },
     {
@@ -51,7 +56,7 @@ const data = reactive({
       link: 'https://github.com/01Petard/Autofill/',
     },
     {
-      name: 'TrackFit 形轨',
+      name: 'TrackFit - 形轨',
       description: '记录身体变化，看见习惯的影响',
       link: 'https://fit.bugstack.top/',
     },
