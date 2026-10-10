@@ -23,6 +23,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^9.2.0",
     "@iconify-json/ant-design": "^1.2.8",
+    "@iconify-json/lucide": "^1.2.142",
     "@unocss/eslint-plugin": "^66.7.5",
     "@vitejs/plugin-vue": "^6.0.8",
     "eslint": "^10.7.0",

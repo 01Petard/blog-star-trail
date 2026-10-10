@@ -33,3 +33,5 @@ coverage
 .openclaw
 .codex
 .husky
+
+doc-dev

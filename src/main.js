@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
 
-import '@/assets/css/main.css'
-
 import 'virtual:uno.css'
+import '@/assets/css/main.css'
 
 const app = createApp(App)
 

@@ -18,6 +18,9 @@ importers:
       '@iconify-json/ant-design':
         specifier: ^1.2.8
         version: 1.2.8
+      '@iconify-json/lucide':
+        specifier: ^1.2.142
+        version: 1.2.142
       '@unocss/eslint-plugin':
         specifier: ^66.7.5
         version: 66.7.5(eslint@10.7.0(jiti@2.7.0))(typescript@5.9.3)
@@ -421,6 +424,9 @@ packages:
 
   '@iconify-json/ant-design@1.2.8':
     resolution: {integrity: sha512-rDVVfgK1FUIQ/KEL6BgF+7N2Xfl3PjgFxpsVWlO8sbBve/XbzK248XP6j/D2af9u/DN9yrMVW6wV/3kav2/fTA==}
+
+  '@iconify-json/lucide@1.2.142':
+    resolution: {integrity: sha512-vEGX5X52/l77jRMcmxXk3PiEebldDUs8WFdM8X3Evq1S9p5F+o0VZhx8sqaQsmFEB9Ukp5ND5Q/0g2kQ/LF+rQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3054,6 +3060,10 @@ snapshots:
   '@humanwhocodes/retry@0.4.3': {}
 
   '@iconify-json/ant-design@1.2.8':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/lucide@1.2.142':
     dependencies:
       '@iconify/types': 2.0.0
 
