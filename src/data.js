@@ -18,8 +18,8 @@ export const heroTitles = [
 
 export const categories = [
   {
-    id: 'ai',
-    label: 'Agent应用',
+    id: 'life',
+    label: '生活应用',
   },
   {
     id: 'tools',
@@ -30,12 +30,12 @@ export const categories = [
     label: '创意实验',
   },
   {
-    id: 'life',
-    label: '生活应用',
-  },
-  {
     id: 'browser',
     label: '浏览器扩展',
+  },
+  {
+    id: 'ai',
+    label: 'Agent应用',
   },
 ]
 
@@ -120,7 +120,7 @@ export const projects = [
   },
   {
     name: '哈基米加密解密工具',
-    category: 'tools',
+    category: 'visual',
     description: '把文字变成有趣的曼波语言',
     url: 'https://hajimi.bugstack.top/',
     icon: 'HM',
