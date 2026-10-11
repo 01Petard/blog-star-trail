@@ -63,7 +63,7 @@ pnpm lint:fix      # 检查并自动修复
 ├── public/
 │   ├── CNAME                   # GitHub Pages 自定义域名
 │   ├── mengdenglong.mp3        # 背景音乐（《梦灯笼》）
-│   └── yourname.avif           # 页脚《你的名字》重逢场景图
+│   └── scenery/               # 星空、页脚背景、图标与手写语录
 └── src/
     ├── main.js                 # 应用入口
     ├── App.vue                 # 主页面（导航/简介/项目/博客/页脚）
