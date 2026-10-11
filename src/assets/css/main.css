@@ -625,7 +625,8 @@ h2 > button:hover {
   color: #e4d3e8;
 }
 .reunion {
-  height: calc(200 * var(--u));
+  /* 按底图的显示尺寸预留人物区域，避免最后一排链接覆盖头部。 */
+  height: max(300px, calc(clamp(640px, 65vw, 1000px) * 0.36), 15vw);
   position: relative;
 }
 .footer-signature {
@@ -689,9 +690,6 @@ h2 > button:hover {
     width: 240px;
     right: 20px;
     top: 25px;
-  }
-  .reunion {
-    height: 205px;
   }
 }
 @media (max-width: 560px) {
@@ -830,9 +828,6 @@ h2 > button:hover {
   }
   .social-grid small {
     font-size: 10px;
-  }
-  .reunion {
-    height: 250px;
   }
   .lower-scene {
     background:
