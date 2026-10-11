@@ -45,7 +45,6 @@ let removeEnableAudio
 let scrollFrame = 0
 let hidePlayerTimer = 0
 let lastScrollY = 0
-let scrollingDown = false
 let dragStart
 
 function holdPlayer() {
@@ -54,16 +53,37 @@ function holdPlayer() {
 }
 
 function releasePlayer() {
-  if (!props.suppressed && scrollingDown && visible.value && !pinned.value && !dragging.value && !hidePlayerTimer) {
+  if (!props.suppressed && visible.value && !pinned.value && !dragging.value && !hidePlayerTimer) {
     hidePlayerTimer = window.setTimeout(() => {
       hidePlayerTimer = 0
       if (!pinned.value && !dragging.value && !playerRef.value?.contains(document.activeElement) && !playerRef.value?.matches(':hover'))
         visible.value = false
-    }, 1000)
+    }, 3000)
   }
 }
 
-watch(() => props.suppressed, holdPlayer)
+watch(() => props.suppressed, (suppressed) => {
+  holdPlayer()
+  if (!suppressed)
+    releasePlayer()
+})
+
+function revealPlayer() {
+  if (props.suppressed)
+    return
+  holdPlayer()
+  visible.value = true
+  releasePlayer()
+}
+
+function handlePointerMove(event) {
+  if (event.pointerType !== 'mouse' || props.suppressed || visible.value)
+    return
+  // 隐藏时保留布局尺寸，通过鼠标坐标唤回播放器，不用透明遮罩拦截页面操作。
+  const rect = playerRef.value.getBoundingClientRect()
+  if (event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom)
+    revealPlayer()
+}
 
 function togglePinned() {
   pinned.value = !pinned.value
@@ -127,13 +147,10 @@ function handlePageScroll() {
     if (props.suppressed)
       return
     if (delta > 2) {
-      scrollingDown = true
       releasePlayer()
     }
     else if (delta < -2) {
-      holdPlayer()
-      scrollingDown = false
-      visible.value = true
+      revealPlayer()
     }
   })
 }
@@ -310,6 +327,7 @@ onMounted(() => {
   lastScrollY = Math.max(window.scrollY, 0)
   window.addEventListener('scroll', handlePageScroll, { passive: true })
   window.addEventListener('resize', handleResize)
+  window.addEventListener('pointermove', handlePointerMove, { passive: true })
   document.addEventListener('pointerdown', enableAudio)
   document.addEventListener('keydown', enableAudio)
   removeEnableAudio = () => {
@@ -317,72 +335,74 @@ onMounted(() => {
     document.removeEventListener('keydown', enableAudio)
   }
   startAutoplay()
+  releasePlayer()
 })
 onUnmounted(() => {
   cancelAnimationFrame(scrollFrame)
   holdPlayer()
   window.removeEventListener('scroll', handlePageScroll)
   window.removeEventListener('resize', handleResize)
+  window.removeEventListener('pointermove', handlePointerMove)
   removeEnableAudio?.()
   audioRef.value?.pause()
 })
 </script>
 
 <template>
-  <Transition name="player-fade" appear>
-    <div v-show="visible && !suppressed" ref="playerRef" :inert="!visible || suppressed" class="music-block" :class="{ 'is-docked': docked, 'is-near-footer': raised, 'is-dragging': dragging }" :style="playerPosition" @pointerenter="holdPlayer" @pointerleave="releasePlayer" @focusin="holdPlayer" @focusout="releasePlayer" @pointerdown="startDrag" @pointermove="moveDrag" @pointerup="endDrag" @pointercancel="endDrag" @lostpointercapture="endDrag">
-      <div class="music-player liquid-glass" role="group" aria-label="背景音乐播放器">
-        <img class="album-art" :src="currentTrack.cover || '/scenery/music_cover.jpg'" alt="" width="32" height="32" draggable="false">
-        <div class="track-name">
-          <strong>{{ currentTrack.title }}</strong><span>{{ muted && isPlaying ? '静音播放' : currentTrack.artist || 'RADWIMPS' }}</span>
-        </div>
-        <div class="transport">
-          <button class="restart-button" :disabled="!canSeek" aria-label="从头重播" @click="restart">
-            <i class="i-lucide-rotate-ccw" aria-hidden="true" />
-          </button>
-          <button class="play-button" :disabled="pending" :aria-pressed="isPlaying" :aria-label="`${isPlaying ? '暂停' : '播放'}${currentTrack.title}`" @click="togglePlay">
-            <i :class="pending ? 'i-lucide-loader-circle' : isPlaying ? 'i-lucide-pause' : 'i-lucide-play'" aria-hidden="true" />
-          </button>
-          <button class="pin-button" :class="{ 'is-pinned': pinned }" :aria-pressed="pinned" :aria-label="pinned ? '恢复自动隐藏' : '固定显示播放器'" :title="pinned ? '恢复自动隐藏' : '固定显示播放器'" @click="togglePinned">
-            <i :class="pinned ? 'i-lucide-pin-off' : 'i-lucide-pin'" aria-hidden="true" />
-          </button>
-        </div>
-        <div class="track-progress">
-          <input type="range" min="0" max="100" step="0.1" :value="progress" :disabled="!canSeek" aria-label="播放进度" :aria-valuetext="timeLabel" @input="seek"><span>{{ timeLabel }}</span>
-        </div>
-        <div class="player-options">
-          <button type="button" class="playback-mode" :aria-label="`播放模式，当前${playbackMode.label}，切换为${nextMode.label}`" :title="`点击切换为${nextMode.label}`" @click="cyclePlaybackMode">
-            <i :class="playbackMode.icon" aria-hidden="true" /><span>播放模式</span><strong aria-live="polite">{{ playbackMode.label }}</strong>
-          </button>
-          <button type="button" class="hide-button" aria-label="隐藏播放器" title="隐藏播放器，上滑可重新显示" @click="hidePlayer">
-            <i class="i-lucide-eye-off" aria-hidden="true" /><span>隐藏</span>
-          </button>
-        </div>
-        <div class="volume-control">
-          <button :aria-pressed="muted" :aria-label="muted ? '取消静音' : '静音'" @click="toggleMute">
-            <i :class="muted ? 'i-lucide-volume-x' : 'i-lucide-volume-2'" aria-hidden="true" />
-          </button><input :value="volume" type="range" min="0" max="1" step="0.01" aria-label="音量" @input="updateVolume">
-        </div>
+  <div ref="playerRef" :inert="!visible || suppressed" :aria-hidden="!visible || suppressed" class="music-block" :class="{ 'is-docked': docked, 'is-near-footer': raised, 'is-dragging': dragging, 'is-hidden': !visible || suppressed }" :style="playerPosition" @pointerenter="holdPlayer" @pointerleave="releasePlayer" @focusin="holdPlayer" @focusout="releasePlayer" @pointerdown="startDrag" @pointermove="moveDrag" @pointerup="endDrag" @pointercancel="endDrag" @lostpointercapture="endDrag">
+    <div class="music-player liquid-glass" role="group" aria-label="背景音乐播放器">
+      <img class="album-art" :src="currentTrack.cover || '/scenery/music_cover.jpg'" alt="" width="32" height="32" draggable="false">
+      <div class="track-name">
+        <strong>{{ currentTrack.title }}</strong><span>{{ muted && isPlaying ? '静音播放' : currentTrack.artist || 'RADWIMPS' }}</span>
       </div>
-      <p v-if="error" class="music-error" role="status">
-        {{ error }}
-      </p>
-      <audio ref="audioRef" :src="currentTrack.src" preload="metadata" autoplay :loop="playbackMode.id === 'single'" @ended="handleEnded" @loadedmetadata="syncTime" @canplay="startAutoplay" @durationchange="syncTime" @timeupdate="syncTime" @play="isPlaying = true" @pause="isPlaying = false" @error="error = '音乐文件未能加载，请点击播放重试。'" />
+      <div class="transport">
+        <button class="restart-button" :disabled="!canSeek" aria-label="从头重播" @click="restart">
+          <i class="i-lucide-rotate-ccw" aria-hidden="true" />
+        </button>
+        <button class="play-button" :disabled="pending" :aria-pressed="isPlaying" :aria-label="`${isPlaying ? '暂停' : '播放'}${currentTrack.title}`" @click="togglePlay">
+          <i :class="pending ? 'i-lucide-loader-circle' : isPlaying ? 'i-lucide-pause' : 'i-lucide-play'" aria-hidden="true" />
+        </button>
+        <button class="pin-button" :class="{ 'is-pinned': pinned }" :aria-pressed="pinned" :aria-label="pinned ? '恢复自动隐藏' : '固定显示播放器'" :title="pinned ? '恢复自动隐藏' : '固定显示播放器'" @click="togglePinned">
+          <i :class="pinned ? 'i-lucide-pin-off' : 'i-lucide-pin'" aria-hidden="true" />
+        </button>
+      </div>
+      <div class="track-progress">
+        <input type="range" min="0" max="100" step="0.1" :value="progress" :disabled="!canSeek" aria-label="播放进度" :aria-valuetext="timeLabel" @input="seek"><span>{{ timeLabel }}</span>
+      </div>
+      <div class="player-options">
+        <button type="button" class="playback-mode" :aria-label="`播放模式，当前${playbackMode.label}，切换为${nextMode.label}`" :title="`点击切换为${nextMode.label}`" @click="cyclePlaybackMode">
+          <i :class="playbackMode.icon" aria-hidden="true" /><span>播放模式</span><strong aria-live="polite">{{ playbackMode.label }}</strong>
+        </button>
+        <button type="button" class="hide-button" aria-label="隐藏播放器" title="隐藏播放器，上滑或悬浮原位置可重新显示" @click="hidePlayer">
+          <i class="i-lucide-eye-off" aria-hidden="true" /><span>隐藏</span>
+        </button>
+      </div>
+      <div class="volume-control">
+        <button :aria-pressed="muted" :aria-label="muted ? '取消静音' : '静音'" @click="toggleMute">
+          <i :class="muted ? 'i-lucide-volume-x' : 'i-lucide-volume-2'" aria-hidden="true" />
+        </button><input :value="volume" type="range" min="0" max="1" step="0.01" aria-label="音量" @input="updateVolume">
+      </div>
     </div>
-  </Transition>
+    <p v-if="error" class="music-error" role="status">
+      {{ error }}
+    </p>
+    <audio ref="audioRef" :src="currentTrack.src" preload="metadata" autoplay :loop="playbackMode.id === 'single'" @ended="handleEnded" @loadedmetadata="syncTime" @canplay="startAutoplay" @durationchange="syncTime" @timeupdate="syncTime" @play="isPlaying = true" @pause="isPlaying = false" @error="error = '音乐文件未能加载，请点击播放重试。'" />
+  </div>
 </template>
 
 <style scoped>
-.player-fade-enter-active,
-.player-fade-leave-active {
-  transition: opacity 320ms ease-in-out;
+.music-block {
+  transition:
+    opacity 320ms ease-in-out,
+    visibility 0s;
 }
-.player-fade-enter-from,
-.player-fade-leave-to {
+.music-block.is-hidden {
   opacity: 0;
-}
-.player-fade-leave-active {
+  visibility: hidden;
   pointer-events: none;
+  transition:
+    opacity 320ms ease-in-out,
+    visibility 0s 320ms;
 }
 @media (min-width: 601px) {
   .music-block {
