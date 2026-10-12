@@ -22,6 +22,10 @@ export const categories = [
     label: '生活应用',
   },
   {
+    id: 'ai',
+    label: 'Agent应用',
+  },
+  {
     id: 'tools',
     label: '实用工具',
   },
@@ -32,10 +36,6 @@ export const categories = [
   {
     id: 'browser',
     label: '浏览器扩展',
-  },
-  {
-    id: 'ai',
-    label: 'Agent应用',
   },
 ]
 
@@ -172,7 +172,7 @@ export const projects = [
   },
   {
     name: '复古终端风格起始页',
-    category: 'life',
+    category: 'browser',
     description: '一个专注效率的终端风格仪表盘',
     url: 'https://start.bugstack.top/',
     icon: 'TM',
@@ -237,7 +237,7 @@ export const projects = [
   },
   {
     name: 'Pintree 收藏夹',
-    category: 'life',
+    category: 'browser',
     description: '整理链接灵感的配置型个人收藏夹',
     url: 'https://fav.bugstack.top/',
     icon: 'PT',
