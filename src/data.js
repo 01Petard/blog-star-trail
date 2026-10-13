@@ -41,12 +41,23 @@ export const categories = [
 
 export const projects = [
   {
+    name: 'Axiom Forge · 模型管理平台',
+    category: 'ai',
+    description: '模型研发，从这里开始',
+    url: 'https://forge.bugstack.top/',
+    icon: 'AX',
+    tags: [
+      '模型管理',
+      'Agent应用',
+      '研发平台',
+    ],
+  },
+  {
     name: 'RepoTime · 代码时光机',
     category: 'tools',
     description: '朝花夕拾，回放你的开发旅程',
     url: 'https://repo.bugstack.top/',
     icon: 'RT',
-    spotlight: true,
     tags: [
       '开发工具',
       'Git',
@@ -59,7 +70,6 @@ export const projects = [
     description: '专注浏览的网页媒体信息屏蔽插件',
     url: 'https://github.com/01Petard/FocusMask/',
     icon: 'FM',
-    spotlight: true,
     tags: [
       '浏览器扩展',
       '隐私保护',
@@ -72,7 +82,6 @@ export const projects = [
     description: '更便捷的图库搜索与浏览体验',
     url: 'https://e-gallery.bugstack.top/',
     icon: 'GL',
-    spotlight: true,
     tags: [
       '生活应用',
       '开源项目',
@@ -85,7 +94,6 @@ export const projects = [
     description: '基于大语言模型的智能表单填充扩展',
     url: 'https://github.com/01Petard/Autofill/',
     icon: 'AF',
-    spotlight: false,
     tags: [
       '浏览器扩展',
       'AI',
@@ -98,7 +106,6 @@ export const projects = [
     description: '记录身体变化，看见习惯的影响',
     url: 'https://fit.bugstack.top/',
     icon: 'TF',
-    spotlight: false,
     tags: [
       '生活应用',
       '数据记录',
@@ -111,7 +118,6 @@ export const projects = [
     description: 'AI 应用功能演示，需部署后使用',
     url: 'https://chat.bugstack.top/',
     icon: 'AI',
-    spotlight: false,
     tags: [
       'AI / Agent',
       'LLM',
@@ -124,7 +130,6 @@ export const projects = [
     description: '把文字变成有趣的曼波语言',
     url: 'https://hajimi.bugstack.top/',
     icon: 'HM',
-    spotlight: false,
     tags: [
       '开发工具',
       '加密解密',
@@ -137,7 +142,6 @@ export const projects = [
     description: '用粒子探索土星与星环的视觉效果',
     url: 'https://saturn.bugstack.top/',
     icon: 'ST',
-    spotlight: false,
     tags: [
       '创意实验',
       '粒子特效',
@@ -150,7 +154,6 @@ export const projects = [
     description: '实时识别与捕捉手部动作轨迹',
     url: 'https://hand.bugstack.top/',
     icon: 'HD',
-    spotlight: false,
     tags: [
       '创意实验',
       '视觉交互',
@@ -163,7 +166,6 @@ export const projects = [
     description: '一键生成创意像素形变图',
     url: 'https://pixel.bugstack.top/',
     icon: 'PX',
-    spotlight: false,
     tags: [
       '创意实验',
       '图像处理',
@@ -176,7 +178,6 @@ export const projects = [
     description: '一个专注效率的终端风格仪表盘',
     url: 'https://start.bugstack.top/',
     icon: 'TM',
-    spotlight: false,
     tags: [
       '生活应用',
       '个性化',
@@ -189,7 +190,6 @@ export const projects = [
     description: '配置智能体，编排工作流',
     url: 'https://github.com/01Petard/ai-agent-station-web/',
     icon: 'AG',
-    spotlight: false,
     tags: [
       'AI / Agent',
       '智能体',
@@ -202,7 +202,6 @@ export const projects = [
     description: '简化校园访客的预约操作',
     url: 'https://bit.bugstack.top/',
     icon: 'BT',
-    spotlight: false,
     tags: [
       '开发工具',
       '预约',
@@ -215,7 +214,6 @@ export const projects = [
     description: '查看当前网络的公网 IPv4 出口',
     url: 'https://ip.bugstack.top/',
     icon: 'IP',
-    spotlight: false,
     tags: [
       '开发工具',
       '网络',
@@ -228,7 +226,6 @@ export const projects = [
     description: '忙里偷闲，看一眼下班倒计时',
     url: 'https://shutdown.bugstack.top/',
     icon: 'OFF',
-    spotlight: false,
     tags: [
       '开发工具',
       '时间',
@@ -241,7 +238,6 @@ export const projects = [
     description: '整理链接灵感的配置型个人收藏夹',
     url: 'https://fav.bugstack.top/',
     icon: 'PT',
-    spotlight: false,
     tags: [
       '生活应用',
       '收藏',

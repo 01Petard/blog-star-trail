@@ -4,6 +4,7 @@ defineProps({
 })
 
 const icons = {
+  AX: 'i-lucide-anvil',
   RT: 'i-lucide-rotate-ccw-clock',
   FM: 'i-lucide-shield-check',
   GL: 'i-lucide-images',
@@ -21,7 +22,7 @@ const icons = {
   OFF: 'i-lucide-clock',
   PT: 'i-lucide-folder-bookmark',
 }
-const colors = { RT: 'purple', FM: 'blue', GL: 'pink', AF: 'purple', TF: 'pink', AI: 'amber', AG: 'purple', HM: 'amber', ST: 'amber', HD: 'purple', PX: 'blue', TM: 'blue', BT: 'blue', IP: 'blue', OFF: 'rose', PT: 'amber' }
+const colors = { AX: 'amber', RT: 'purple', FM: 'blue', GL: 'pink', AF: 'purple', TF: 'pink', AI: 'amber', AG: 'purple', HM: 'amber', ST: 'amber', HD: 'purple', PX: 'blue', TM: 'blue', BT: 'blue', IP: 'blue', OFF: 'rose', PT: 'amber' }
 </script>
 
 <template>
