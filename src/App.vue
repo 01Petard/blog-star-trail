@@ -19,7 +19,9 @@ const fullscreenPending = ref(false)
 const heroTitle = heroTitles[Math.floor(Math.random() * heroTitles.length)]
 const showcases = categories.map(category => ({
   ...category,
-  projects: projects.filter(project => project.category === category.id),
+  projects: projects
+    .filter(project => project.category === category.id)
+    .sort((a, b) => (a.order ?? Number.POSITIVE_INFINITY) - (b.order ?? Number.POSITIVE_INFINITY)),
 }))
 const blogs = [
   { title: '代码港湾', description: '个人知识库，学习与随笔', link: 'https://01petard.github.io/blog-vue-vitepress/', action: '迎接未来', icon: 'i-lucide-book-open', color: 'blue' },
