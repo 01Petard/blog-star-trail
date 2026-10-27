@@ -263,6 +263,19 @@ export const projects = [
     ],
   },
   {
+    name: 'StatureAtlas · 身高体重对照表',
+    category: 'tools',
+    order: 0,
+    description: '对照身高体重与BMI，识别身材状况',
+    url: 'https://github.com/01Petard/StatureAtlas/',
+    icon: 'SA',
+    tags: [
+      '健康工具',
+      '数据可视化',
+      '计算工具',
+    ],
+  },
+  {
     name: 'Pintree 收藏夹',
     category: 'browser',
     order: 40,
