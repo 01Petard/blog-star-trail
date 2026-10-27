@@ -57,7 +57,7 @@ pnpm lint     # 代码检查
 | 想修改什么 | 文件 | 对应内容 |
 | --- | --- | --- |
 | 首页短句 | [src/data.js](src/data.js) | `heroTitles`，支持换行 |
-| 项目分类与作品 | [src/data.js](src/data.js) | `categories`、`projects` |
+| 项目分类与作品 | [src/data.js](src/data.js) | `categories` 内各分类的 `projects` 数组，按数组顺序展示 |
 | 头像 | [src/config.js](src/config.js) | `profile.avatar`、`profile.avatars` |
 | 背景音乐 | [src/config.js](src/config.js) | `music.tracks` |
 | 彗星与星轨 | [src/config.js](src/config.js) | `effects.comet`、`effects.sky` |

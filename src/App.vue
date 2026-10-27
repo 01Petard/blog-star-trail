@@ -4,7 +4,7 @@ import MiniPlayer from '@/components/MiniPlayer.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import StarTrails from '@/components/StarTrails.vue'
 import { siteConfig } from '@/config'
-import { categories, heroTitles, projects } from '@/data'
+import { categories, heroTitles } from '@/data'
 
 const reducedMotion = ref(false)
 const scrolled = ref(false)
@@ -17,12 +17,6 @@ const immersive = ref(false)
 const immersiveControlsVisible = ref(true)
 const fullscreenPending = ref(false)
 const heroTitle = heroTitles[Math.floor(Math.random() * heroTitles.length)]
-const showcases = categories.map(category => ({
-  ...category,
-  projects: projects
-    .filter(project => project.category === category.id)
-    .sort((a, b) => (a.order ?? Number.POSITIVE_INFINITY) - (b.order ?? Number.POSITIVE_INFINITY)),
-}))
 const blogs = [
   { title: '代码港湾', description: '个人知识库，学习与随笔', link: 'https://01petard.github.io/blog-vue-vitepress/', action: '迎接未来', icon: 'i-lucide-book-open', color: 'blue' },
   { title: '花火の红玉宫', description: '旧时博客与过往记录', link: 'https://01petard.github.io/', action: '回到过去', icon: 'i-lucide-notebook-pen', color: 'pink' },
@@ -216,7 +210,7 @@ onUnmounted(() => {
                 Projects
               </h2>
             </div>
-            <section v-for="showcase in showcases" :key="showcase.id" class="project-showcase" :aria-labelledby="`showcase-${showcase.id}`">
+            <section v-for="showcase in categories" :key="showcase.id" class="project-showcase" :aria-labelledby="`showcase-${showcase.id}`">
               <h3 :id="`showcase-${showcase.id}`" class="showcase-title">
                 {{ showcase.label }}
               </h3>
