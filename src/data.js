@@ -114,7 +114,7 @@ export const categories = [
       {
         name: 'StatureAtlas · 身高体重对照表',
         description: '对照身高体重与BMI，识别身材状况',
-        url: 'https://github.com/01Petard/StatureAtlas/',
+        url: 'https://atlas.bugstack.top/',
         icon: 'SA',
         tags: [
           '健康工具',
