@@ -16,6 +16,7 @@ export const heroTitles = [
   '当你在凝视着网页的时候\n网页也正在凝视着你',
 ]
 
+// 每个项目统一使用 3 个标签，顺序为：形态/领域 → 核心功能 → 技术/主题。
 // 分类和组内项目均按数组顺序展示，新增项目直接放入对应的 projects 数组。
 export const categories = [
   {
@@ -23,13 +24,35 @@ export const categories = [
     label: '生活应用',
     projects: [
       {
+        name: 'Gallery Lens · E站替代客户端',
+        description: '更便捷的图库搜索与浏览体验',
+        url: 'https://e-gallery.bugstack.top/',
+        icon: 'GL',
+        tags: [
+          '第三方客户端',
+          '图片浏览',
+          '图库检索',
+        ],
+      },
+      {
+        name: 'TrackFit · 形轨',
+        description: '记录身体变化，看见习惯的影响',
+        url: 'https://fit.bugstack.top/',
+        icon: 'TF',
+        tags: [
+          '健康管理',
+          '身体记录',
+          '习惯追踪',
+        ],
+      },
+      {
         name: 'Pixiv 每日排行榜 Top50',
         description: '轮播每日人气插画，遇见新的灵感',
         url: 'https://pixiv.bugstack.top/',
         icon: 'PV',
         tags: [
-          '图片浏览',
           '插画艺术',
+          '图片浏览',
           '排行榜',
         ],
       },
@@ -40,30 +63,8 @@ export const categories = [
         icon: 'RT',
         tags: [
           '开发工具',
-          '项目展示',
+          '代码回顾',
           '数据可视化',
-        ],
-      },
-      {
-        name: 'Gallery Lens · E站替代客户端',
-        description: '更便捷的图库搜索与浏览体验',
-        url: 'https://e-gallery.bugstack.top/',
-        icon: 'GL',
-        tags: [
-          '第三方客户端',
-          '图片浏览',
-          '图库工具',
-        ],
-      },
-      {
-        name: 'TrackFit · 形轨',
-        description: '记录身体变化，看见习惯的影响',
-        url: 'https://fit.bugstack.top/',
-        icon: 'TF',
-        tags: [
-          '生活应用',
-          '健康管理',
-          '数据记录',
         ],
       },
     ],
@@ -73,36 +74,47 @@ export const categories = [
     label: 'AI 应用',
     projects: [
       {
-        name: 'Axiom Forge · 模型管理平台',
+        name: 'Agent 智能体工作台',
+        description: '一站式构建、编排与调试你的智能体',
+        url: 'https://agent.bugstack.top',
+        icon: 'AW',
+        tags: [
+          '智能体',
+          '可视化编排',
+          '调试验证',
+        ],
+      },
+      {
+        name: 'MLOps 模型研发运营平台',
         description: '模型研发，从这里开始',
         url: 'https://forge.bugstack.top/',
         icon: 'AX',
         tags: [
-          'AI 平台',
-          '机器学习',
-          '研发工具',
+          'MLOps',
+          '模型训练',
+          '推理服务',
         ],
       },
       {
-        name: '在线 Agent 演示项目',
+        name: '仿GPT风格 Agent 原型演示',
         description: 'AI 应用功能演示，需部署后使用',
         url: 'https://chat.bugstack.top/',
         icon: 'AI',
         tags: [
-          'AI 应用',
           '智能体',
-          '演示项目',
+          'AI 对话',
+          '原型演示',
         ],
       },
       {
-        name: 'Agent 智能管理平台',
+        name: 'Agent 运行可视化技术验证',
         description: '配置智能体，编排工作流',
         url: 'https://github.com/01Petard/ai-agent-station-web/',
         icon: 'AG',
         tags: [
-          'AI 平台',
           '智能体',
           '工作流',
+          '运行可视化',
         ],
       },
     ],
@@ -118,8 +130,8 @@ export const categories = [
         icon: 'SA',
         tags: [
           '健康工具',
+          'BMI 计算',
           '数据可视化',
-          '计算工具',
         ],
       },
       {
@@ -129,7 +141,7 @@ export const categories = [
         icon: 'BT',
         tags: [
           '校园服务',
-          '预约系统',
+          '访客预约',
           '便民工具',
         ],
       },
@@ -168,8 +180,8 @@ export const categories = [
         icon: 'HM',
         tags: [
           '趣味工具',
-          '文本处理',
-          '加密解密',
+          '文本加密',
+          '曼波语言',
         ],
       },
       {
@@ -178,9 +190,9 @@ export const categories = [
         url: 'https://saturn.bugstack.top/',
         icon: 'ST',
         tags: [
-          '创意实验',
           '粒子特效',
           '天文主题',
+          '交互动效',
         ],
       },
       {
@@ -190,8 +202,8 @@ export const categories = [
         icon: 'HD',
         tags: [
           '计算机视觉',
-          '人机交互',
-          '动作识别',
+          '手势识别',
+          '实时交互',
         ],
       },
       {
@@ -200,7 +212,7 @@ export const categories = [
         url: 'https://pixel.bugstack.top/',
         icon: 'PX',
         tags: [
-          '图像工具',
+          '图像生成',
           '像素艺术',
           '创意设计',
         ],
@@ -217,9 +229,9 @@ export const categories = [
         url: 'https://github.com/01Petard/FocusMask/',
         icon: 'FM',
         tags: [
-          '浏览器扩展',
+          '内容屏蔽',
+          '专注模式',
           '隐私保护',
-          '效率工具',
         ],
       },
       {
@@ -228,8 +240,8 @@ export const categories = [
         url: 'https://github.com/01Petard/Autofill/',
         icon: 'AF',
         tags: [
-          '浏览器扩展',
-          '人工智能',
+          '大语言模型',
+          '表单填充',
           '办公效率',
         ],
       },
@@ -240,7 +252,7 @@ export const categories = [
         icon: 'TM',
         tags: [
           '起始页',
-          '浏览器工具',
+          '终端风格',
           '个性化',
         ],
       },
@@ -251,10 +263,55 @@ export const categories = [
         icon: 'PT',
         tags: [
           '书签工具',
-          '链接管理',
+          '链接收藏',
           '个人导航',
         ],
       },
     ],
+  },
+]
+
+// 博客入口按数组顺序展示，新增博客直接追加。
+export const blogs = [
+  {
+    title: '代码港湾',
+    description: '个人知识库，学习与随笔',
+    link: 'https://01petard.github.io/blog-vue-vitepress/',
+    action: '迎接未来',
+    icon: 'i-lucide-book-open',
+    color: 'blue'
+  },
+  {
+    title: '花火の红玉宫',
+    description: '旧时博客与过往记录',
+    link: 'https://01petard.github.io/',
+    action: '回到过去',
+    icon: 'i-lucide-notebook-pen',
+    color: 'pink'
+  },
+]
+
+// 社交与联系方式按数组顺序展示，image 优先于 icon。
+export const socialLinks = [
+  {
+    title: 'GitHub',
+    description: '开源代码与项目',
+    link: 'https://github.com/01Petard/',
+    image: '/scenery/github.svg',
+    color: 'github'
+  },
+  {
+    title: 'Bilibili',
+    description: '视频与日常',
+    link: 'https://space.bilibili.com/12764212/',
+    image: '/scenery/bilibili.svg',
+    color: 'bilibili'
+  },
+  {
+    title: '留言板',
+    description: '交流想法与灵感',
+    link: 'https://doc.bugstack.top/about.html',
+    icon: 'i-lucide-mail',
+    color: 'message'
   },
 ]

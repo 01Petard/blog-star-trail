@@ -4,7 +4,7 @@ import MiniPlayer from '@/components/MiniPlayer.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import StarTrails from '@/components/StarTrails.vue'
 import { siteConfig } from '@/config'
-import { categories, heroTitles } from '@/data'
+import { blogs, categories, heroTitles, socialLinks } from '@/data'
 
 const reducedMotion = ref(false)
 const scrolled = ref(false)
@@ -17,15 +17,6 @@ const immersive = ref(false)
 const immersiveControlsVisible = ref(true)
 const fullscreenPending = ref(false)
 const heroTitle = heroTitles[Math.floor(Math.random() * heroTitles.length)]
-const blogs = [
-  { title: '代码港湾', description: '个人知识库，学习与随笔', link: 'https://01petard.github.io/blog-vue-vitepress/', action: '迎接未来', icon: 'i-lucide-book-open', color: 'blue' },
-  { title: '花火の红玉宫', description: '旧时博客与过往记录', link: 'https://01petard.github.io/', action: '回到过去', icon: 'i-lucide-notebook-pen', color: 'pink' },
-]
-const socialLinks = [
-  { title: 'GitHub', description: '开源代码与项目', link: 'https://github.com/01Petard/', image: '/scenery/github.svg', color: 'github' },
-  { title: 'Bilibili', description: '视频与日常', link: 'https://space.bilibili.com/12764212/', image: '/scenery/bilibili.svg', color: 'bilibili' },
-  { title: '留言板', description: '交流想法与灵感', link: 'https://doc.bugstack.top/about.html', icon: 'i-lucide-mail', color: 'message' },
-]
 let preference
 let footerObserver
 let immersiveControlsTimer = 0

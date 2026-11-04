@@ -2,6 +2,12 @@
 import { defineConfig, presetAttributify, presetIcons, presetMini, presetTypography, presetUno } from 'unocss'
 
 export default defineConfig({
+  content: {
+    pipeline: {
+      // 默认不扫描纯 .js/.ts，data.js 中的图标类名需要额外纳入扫描。
+      include: [/\.(vue|svelte|[jt]sx|vine.ts|mdx?|astro|elm|php|phtml|marko|html|js)($|\?)/],
+    },
+  },
   presets: [
     // mini
     presetMini(),

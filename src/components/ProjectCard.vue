@@ -6,6 +6,7 @@ defineProps({
 const icons = {
   PV: 'i-lucide-gallery-horizontal-end',
   AX: 'i-lucide-anvil',
+  AW: 'i-lucide-layout-dashboard',
   RT: 'i-lucide-rotate-ccw-clock',
   FM: 'i-lucide-shield-check',
   GL: 'i-lucide-images',
@@ -24,7 +25,7 @@ const icons = {
   SA: 'i-lucide-ruler',
   PT: 'i-lucide-folder-bookmark',
 }
-const colors = { PV: 'blue', AX: 'amber', RT: 'purple', FM: 'blue', GL: 'pink', AF: 'purple', TF: 'pink', AI: 'amber', AG: 'purple', HM: 'amber', ST: 'amber', HD: 'purple', PX: 'blue', TM: 'blue', BT: 'blue', IP: 'blue', OFF: 'rose', SA: 'blue', PT: 'amber' }
+const colors = { PV: 'blue', AX: 'amber', AW: 'blue', RT: 'purple', FM: 'blue', GL: 'pink', AF: 'purple', TF: 'pink', AI: 'amber', AG: 'purple', HM: 'amber', ST: 'amber', HD: 'purple', PX: 'blue', TM: 'blue', BT: 'blue', IP: 'blue', OFF: 'rose', SA: 'blue', PT: 'amber' }
 </script>
 
 <template>
