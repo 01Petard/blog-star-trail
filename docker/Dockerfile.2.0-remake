@@ -1,0 +1,8 @@
+FROM nginx:alpine
+
+LABEL org.opencontainers.image.title="blog-star-trail 2.0-remake" \
+      org.opencontainers.image.description="Star Trail 旧版静态站点存档（bak/colorful_star）"
+
+COPY . /usr/share/nginx/html
+
+EXPOSE 80

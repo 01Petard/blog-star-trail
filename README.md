@@ -61,7 +61,8 @@ pnpm lint     # 代码检查
 | 头像 | [src/config.js](src/config.js) | `profile.avatar`、`profile.avatars` |
 | 背景音乐 | [src/config.js](src/config.js) | `music.tracks` |
 | 彗星与星轨 | [src/config.js](src/config.js) | `effects.comet`、`effects.sky` |
-| 博客、社交与页面文案 | [src/App.vue](src/App.vue) | 页面内容及链接 |
+| 博客与联系方式 | [src/data.js](src/data.js) | `blogs`、`socialLinks` |
+| 页面文案 | [src/App.vue](src/App.vue) | 页面结构与静态文案 |
 | 站点标题、统计 | [index.html](index.html) | HTML 元信息及 51.la 脚本 |
 | 公共素材 | [public](public) | 图标、音乐、星空和黄昏背景 |
 
@@ -91,6 +92,34 @@ pnpm lint     # 代码检查
 **注意：现有 [netlify.toml](netlify.toml) 仍指定 Node 20。** 在 Netlify 部署前应将该配置中的 `NODE_VERSION` 更新为 `24`，仅在控制台设置可能被文件配置覆盖。本次 README 整理未修改部署配置。
 
 更新内容后重新构建并替换 `dist`，或推送到已连接的部署分支。
+
+### Docker部署（历史版本）
+
+两个旧版本已构建为静态站点镜像并发布到 Docker Hub：
+
+| 标签 | 版本 | 预览 |
+| --- | --- | --- |
+| `1.0-remake` | 1.0 版本存档 | <img src="https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202611041400541.png" alt="FireShot Capture 012 - 热爱可抵岁月漫长 - [localhost]" style="zoom:25%;" /> |
+| `2.0-remake` | 2.0 版本存档 | <img src="https://cdn.jsdelivr.net/gh/01Petard/imageURL@main/img/202611041400213.png" alt="FireShot Capture 015 - 热爱可抵岁月漫长 - [localhost]" style="zoom:25%;" /> |
+
+```sh
+# 1.0 版本
+docker pull 01petard/blog-star-trail:1.0-remake
+docker run -d --name blog-star-trail-1.0-remake -p 8080:80 01petard/blog-star-trail:1.0-remake
+
+# 2.0 版本
+docker pull 01petard/blog-star-trail:2.0-remake
+docker run -d --name blog-star-trail-2.0-remake -p 8080:80 01petard/blog-star-trail:2.0-remake
+```
+
+容器内使用 Nginx 提供静态页面，默认监听 `80`。两个版本不能同时占用宿主机的 `8080` 端口；如需并行运行，请修改其中一个的端口映射，例如 `-p 8081:80`。
+
+如需从源码重新打包，可使用仓库中的 Dockerfile：
+
+```sh
+docker build -f docker/Dockerfile.1.0-remake -t 01petard/blog-star-trail:1.0-remake output/dist-1.0-remake
+docker build -f docker/Dockerfile.2.0-remake -t 01petard/blog-star-trail:2.0-remake output/dist-2.0-remake
+```
 
 ## 常见问题
 
