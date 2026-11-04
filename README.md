@@ -134,3 +134,4 @@ docker build -f docker/Dockerfile.2.0-remake -t 01petard/blog-star-trail:2.0-rem
 页面设计参考 [哞菇 / Nekotora · fLaG.Moe](https://flag.moe/)。背景音乐《夢燈籠》来自 RADWIMPS，黄昏插画与《你的名字》相关；代码与第三方音乐、图片的使用权限应分别确认。字体许可见 [MaShanZheng-OFL.txt](public/scenery/MaShanZheng-OFL.txt)。
 
 欢迎通过 [Issues](https://github.com/01Petard/star-trail/issues) 反馈问题，附上浏览器、设备尺寸和复现步骤。当前仓库未提供项目级 `LICENSE` 文件。
+
