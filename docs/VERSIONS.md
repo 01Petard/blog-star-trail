@@ -79,15 +79,13 @@ blog-star-trail/
 │   ├── switcher.css                 #   切换器样式（st- 前缀，作用域限定）
 │   └── uno.js                       #   UnoCSS 唯一 import 入口
 │
-├── public/                          # 仅剩站点级文件
-│   └── CNAME
+├── .github/workflows/deploy.yml     # 唯一部署通道：构建 dist 并发布到 GitHub Pages
 │
 ├── vite.config.js                   # 4 个 HTML 入口 + 4 个别名 + 2 个构建插件
 ├── uno.config.js                    # 扫描 v1|v2|v3 全量与根跳转页
 ├── jsconfig.json                    # paths 同步为版本别名
 ├── components.d.ts                  # 无全局组件声明，避免同名组件混淆
 ├── eslint.config.js                 # 忽略 v1/v2 历史快照
-├── netlify.toml                     # 未改动
 ├── README.md
 └── docs/VERSIONS.md
 ```
@@ -184,7 +182,7 @@ blog-star-trail/
 | `jsconfig.json` | `paths` → `./v1/*`、`./v2/*`、`./v3/*`、`./shared/*` |
 | `components.d.ts` | 无 `GlobalComponents` 声明 |
 | `eslint.config.js` | `ignores` 含 `./v1/**`、`./v2/**` |
-| `netlify.toml` | **未改动**：`/*` → `/index.html` 200 rewrite 不覆盖已存在的 `dist/vN/index.html` |
+| `.github/workflows/deploy.yml` | 唯一部署通道：`pnpm build` → 上传 `dist` → GitHub Pages |
 | `package.json`、`pnpm-lock.yaml` | **未改动**，无新增依赖 |
 
 ## 6. 静态资源归属
@@ -206,7 +204,6 @@ blog-star-trail/
 | `v3/img/github.svg`、`bilibili.svg` | 图片 | `v3/data.js` 社交链接 |
 | `v3/img/star-decor.svg` | 图片 | 无（存档，原 `scenery/star.svg`） |
 | `v3/assets/MaShanZheng-OFL.txt` | 文档 | 字体许可，README 引用 |
-| `public/CNAME` | 站点级 | 部署，与版本无关 |
 
 ## 7. 运行与验证
 

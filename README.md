@@ -94,9 +94,11 @@ pnpm lint     # 代码检查
 
 仓库包含 [Pages 工作流](.github/workflows/deploy.yml)，在 `main` / `master` 推送、PR 和手动运行时触发。使用前在仓库 **Settings → Pages** 中选择 **GitHub Actions** 作为来源。
 
-[public/CNAME](public/CNAME) 当前包含作者的自定义域名。复用项目时请改成自己的裸域名（如 `home.example.com`，不带协议或路径），或删除该文件。当前 [Vite 配置](vite.config.js) 使用 `base: '/'`；若部署到 `/<仓库名>/` 子路径，还需同步调整构建路径及组件中的根路径资源引用。
+自定义域名不依赖仓库文件：项目已移除 `CNAME`，域名由仓库 **Settings → Pages → Custom domain** 维护（Actions 部署不读取产物中的 CNAME 文件）。当前 [Vite 配置](vite.config.js) 使用 `base: '/'`；若部署到 `/<仓库名>/` 子路径，还需同步调整构建路径及组件中的根路径资源引用。
 
-### Netlify 或其他静态托管
+### 其他静态托管
+
+项目已移除 `netlify.toml`，当前只使用 GitHub Actions 部署。若要迁移到其它平台，按下表配置即可：
 
 | 设置 | 值 |
 | --- | --- |
@@ -105,7 +107,7 @@ pnpm lint     # 代码检查
 | 发布目录 | `dist` |
 | Node.js | 满足 `≥24.11.0`，建议 24.x |
 
-**注意：现有 [netlify.toml](netlify.toml) 仍指定 Node 20。** 在 Netlify 部署前应将该配置中的 `NODE_VERSION` 更新为 `24`，仅在控制台设置可能被文件配置覆盖。本次 README 整理未修改部署配置。
+**不要配置 `/*` → `/index.html` 的 SPA 回退重写。** 本站是多入口静态站，`/v1/`、`/v2/`、`/v3/` 各有自己的 `index.html`；全局回退会把它们全部改写成根跳转页。目录形式的 URL 只需要服务器默认返回该目录下的 `index.html`，绝大多数静态托管默认如此。
 
 更新内容后重新构建并替换 `dist`，或推送到已连接的部署分支。
 
