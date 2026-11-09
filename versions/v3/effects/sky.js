@@ -1,4 +1,4 @@
-import { siteConfig } from '@/config'
+import { siteConfig } from '@v3/config'
 
 // 独立 Canvas 层：视觉计时只在首屏可见、页签激活且未暂停时推进。
 export function createSkyEffects(canvas, { comet = true, ...options } = {}) {

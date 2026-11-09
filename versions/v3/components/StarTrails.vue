@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { createSkyEffects } from '@/effects/sky'
+import { createSkyEffects } from '@v3/effects/sky'
 
 const props = defineProps({
   showComet: { type: Boolean, default: true },

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@v1/*": ["./versions/v1/*"],
+      "@v2/*": ["./versions/v2/*"],
+      "@v3/*": ["./versions/v3/*"],
+      "@shared/*": ["./versions/shared/*"]
     },
     "allowJs": true
   },

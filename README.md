@@ -12,6 +12,7 @@
   <p>
     <a href="#你可以用它做什么">功能</a> ·
     <a href="#快速开始">快速开始</a> ·
+    <a href="#多版本共存">多版本</a> ·
     <a href="#换成你的主页">个性化</a> ·
     <a href="#部署">部署</a>
   </p>
@@ -24,6 +25,7 @@
 - **连接过去与现在**：博客、个人介绍与社交链接集中呈现，作为自己的网络名片。
 - **留一会儿看星空**：Canvas 星轨、彗星尾迹与黄昏渐变组成背景，可切换沉浸模式。
 - **给页面一点声音**：迷你播放器支持播放、暂停、进度和音量调节。
+- **回看历史版本**：1.0、2.0 与当前 3.0 三个页面共存，右上角按钮随时切换。
 
 | 体验 | 实现 |
 | --- | --- |
@@ -42,13 +44,27 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-打开终端中显示的 Vite 地址，默认端口为 `5173`。
+打开终端中显示的 Vite 地址，默认端口为 `5173`。访问 `/` 为当前 3.0，`/v1/` 与 `/v2/` 为历史版本。
 
 ```sh
-pnpm build    # 生成 dist
+pnpm build    # 一条命令生成三个入口的 dist
 pnpm preview  # 预览构建结果
 pnpm lint     # 代码检查
 ```
+
+## 多版本共存
+
+站点同时保留 1.0、2.0 与当前 3.0，右上角按钮可循环切换（3.0 → 1.0 → 2.0 → 3.0）。
+
+| 版本 | 访问路径 | 源码目录 | 入口 HTML |
+| --- | --- | --- | --- |
+| 1.0 线性星轨 | `/v1/` | [versions/v1](versions/v1) | `v1/index.html` |
+| 2.0 彩色星轨 | `/v2/` | [versions/v2](versions/v2) | `v2/index.html` |
+| 3.0 星轨之下（当前） | `/` | [versions/v3](versions/v3) | `index.html` |
+
+三个版本各自是独立 HTML 文档，只加载自己的 JS 与全局 CSS；同名文件、同名 DOM id、全局样式和 `window` 事件监听不会互相影响。完整的目录结构、文件来源、路径归属与逐文件变更范围见 [docs/VERSIONS.md](docs/VERSIONS.md)。
+
+> 配置当前版本内容时，请编辑 `versions/v3/` 下的文件，**不要**改动 `versions/v1/`、`versions/v2/`（历史快照）。
 
 ## 换成你的主页
 
@@ -56,13 +72,13 @@ pnpm lint     # 代码检查
 
 | 想修改什么 | 文件 | 对应内容 |
 | --- | --- | --- |
-| 首页短句 | [src/data.js](src/data.js) | `heroTitles`，支持换行 |
-| 项目分类与作品 | [src/data.js](src/data.js) | `categories` 内各分类的 `projects` 数组，按数组顺序展示 |
-| 头像 | [src/config.js](src/config.js) | `profile.avatar`、`profile.avatars` |
-| 背景音乐 | [src/config.js](src/config.js) | `music.tracks` |
-| 彗星与星轨 | [src/config.js](src/config.js) | `effects.comet`、`effects.sky` |
-| 博客与联系方式 | [src/data.js](src/data.js) | `blogs`、`socialLinks` |
-| 页面文案 | [src/App.vue](src/App.vue) | 页面结构与静态文案 |
+| 首页短句 | [versions/v3/data.js](versions/v3/data.js) | `heroTitles`，支持换行 |
+| 项目分类与作品 | [versions/v3/data.js](versions/v3/data.js) | `categories` 内各分类的 `projects` 数组，按数组顺序展示 |
+| 头像 | [versions/v3/config.js](versions/v3/config.js) | `profile.avatar`、`profile.avatars` |
+| 背景音乐 | [versions/v3/config.js](versions/v3/config.js) | `music.tracks` |
+| 彗星与星轨 | [versions/v3/config.js](versions/v3/config.js) | `effects.comet`、`effects.sky` |
+| 博客与联系方式 | [versions/v3/data.js](versions/v3/data.js) | `blogs`、`socialLinks` |
+| 页面文案 | [versions/v3/App.vue](versions/v3/App.vue) | 页面结构与静态文案 |
 | 站点标题、统计 | [index.html](index.html) | HTML 元信息及 51.la 脚本 |
 | 公共素材 | [public](public) | 图标、音乐、星空和黄昏背景 |
 
@@ -95,7 +111,7 @@ pnpm lint     # 代码检查
 
 ### Docker部署（历史版本）
 
-两个旧版本已构建为静态站点镜像并发布到 Docker Hub：
+两个旧版本已构建为静态站点镜像并发布到 Docker Hub。当前主站已把 1.0 / 2.0 内联为 `/v1/`、`/v2/` 页面，直接访问即可，无需单独启动容器；以下镜像仅作独立存档用途。
 
 | 标签 | 版本 | 预览 |
 | --- | --- | --- |
@@ -131,6 +147,6 @@ docker build -f docker/Dockerfile.2.0-remake -t 01petard/blog-star-trail:2.0-rem
 
 ## 参考与反馈
 
-页面设计参考 [哞菇 / Nekotora · fLaG.Moe](https://flag.moe/)。背景音乐《夢燈籠》来自 RADWIMPS，黄昏插画与《你的名字》相关；代码与第三方音乐、图片的使用权限应分别确认。字体许可见 [MaShanZheng-OFL.txt](public/scenery/MaShanZheng-OFL.txt)。
+页面设计参考 [哞菇 / Nekotora · fLaG.Moe](https://flag.moe/)。背景音乐《夢燈籠》来自 RADWIMPS，黄昏插画与《你的名字》相关；代码与第三方音乐、图片的使用权限应分别确认。字体许可见 [MaShanZheng-OFL.txt](public/v3/scenery/MaShanZheng-OFL.txt)。
 
 欢迎通过 [Issues](https://github.com/01Petard/star-trail/issues) 反馈问题，附上浏览器、设备尺寸和复现步骤。当前仓库未提供项目级 `LICENSE` 文件。

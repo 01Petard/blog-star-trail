@@ -297,14 +297,14 @@ export const socialLinks = [
     title: 'GitHub',
     description: '开源代码与项目',
     link: 'https://github.com/01Petard/',
-    image: '/scenery/github.svg',
+    image: '/v3/scenery/github.svg',
     color: 'github'
   },
   {
     title: 'Bilibili',
     description: '视频与日常',
     link: 'https://space.bilibili.com/12764212/',
-    image: '/scenery/bilibili.svg',
+    image: '/v3/scenery/bilibili.svg',
     color: 'bilibili'
   },
   {
