@@ -3,8 +3,8 @@
    靠 #id 的高特异性保证不受任何版本样式影响，也不会反向污染它们。 */
 #version-switcher {
   position: fixed;
-  top: 76px;
-  right: 20px;
+  top: 20px;
+  left: 20px;
   z-index: 100;
   margin: 0;
   padding: 0;
@@ -35,7 +35,9 @@
   cursor: pointer;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.28s ease, transform 0.28s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 #version-switcher .st-switcher:hover {
@@ -47,6 +49,14 @@
 #version-switcher .st-switcher:focus-visible {
   outline: 2px solid #c2c2ff;
   outline-offset: 2px;
+}
+
+/* 自动隐藏：淡出并向左收起。容器 #version-switcher 不隐藏、尺寸不变，
+   继续充当鼠标唤出热区；按钮仍保留在 Tab 顺序中，键盘聚焦可唤出。 */
+#version-switcher .st-switcher.st-hidden {
+  opacity: 0;
+  transform: translateX(-14px);
+  pointer-events: none;
 }
 
 #version-switcher .st-badge {
@@ -83,14 +93,30 @@
   white-space: nowrap;
 }
 
+/* 3.0 的键盘跳转链接聚焦时会从左上角滑入，此时让切换器让位，避免遮挡焦点。
+   仅作用于切换器本身，不影响任何版本页面样式。 */
+body:has(.skip-link:focus) #version-switcher .st-switcher {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (max-width: 640px) {
   #version-switcher {
-    top: 68px;
-    right: 12px;
+    top: 12px;
+    left: 12px;
   }
 
   #version-switcher .st-name {
     display: none;
+  }
+}
+
+/* 触屏没有 hover，隐藏后将无法唤出，因此永久显示。 */
+@media (hover: none), (pointer: coarse) {
+  #version-switcher .st-switcher.st-hidden {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
 }
 

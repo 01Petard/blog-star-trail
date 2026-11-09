@@ -2,7 +2,7 @@
 
 > 改造分支：`feat/multi-version-switch`（基于 `main` 新建，已合并入本地 `main`）
 > 目标：把 1.0、2.0 的界面并入当前 3.0，用户可随时切换查看历史版本，且三版代码互不冲突、互不影响。
-> 切换交互目前是**右上角一个按钮，点击循环切到下一个版本**（3.0 → 1.0 → 2.0 → 3.0）。
+> 切换交互目前是**左上角一个按钮，点击循环切到下一个版本**（3.0 → 1.0 → 2.0 → 3.0）；鼠标移开 3 秒后自动淡出，移回左上角即可唤出。
 
 ## 1. 设计原则
 
@@ -21,7 +21,7 @@
 
 改为三个独立 HTML 入口后，**同一时刻浏览器只存在一个版本的 document 和 JS 运行时**。冲突面从「运行时共存」降级为「构建期共存」，构建期只共享 Vue runtime 和一份 UnoCSS 原子类 CSS（原子类语义一致，不会互相覆盖）。因此三版天然隔离。
 
-切换采用整页跳转（临时单按钮形态）。后续若要改无刷新切换（iframe 或 SPA 路由），只需改 `versions/shared/switcher.js`，三个入口和三个版本源码都不用动。
+切换采用整页跳转（临时单按钮形态）。按钮固定在左上角，鼠标移开 3 秒后自动淡出，避免长期遮挡页面内容；`#version-switcher` 容器本身不隐藏、尺寸不变，作为鼠标唤出热区，键盘聚焦按钮也会立即恢复。触屏设备没有 hover 能力，禁用自动隐藏。后续若要改无刷新切换（iframe 或 SPA 路由），只需改 `versions/shared/switcher.js`，三个入口和三个版本源码都不用动。
 
 ## 2. 最终目录结构
 
@@ -156,8 +156,8 @@ blog-star-trail/
 | 文件 | 职责 | 边界 |
 | --- | --- | --- |
 | `versions/shared/versions.js` | 版本清单、当前版本判定、循环切换规则 | 纯数据 + 纯函数，只读 `window.location.pathname` |
-| `versions/shared/switcher.js` | 创建右上角按钮，点击 `location.assign()` | 不 import 任何 `vX` 代码、不依赖 Vue；挂载到独立 `#version-switcher` 节点；带 `stMounted` 防重复 |
-| `versions/shared/switcher.css` | 切换器样式 | 全部选择器限定在 `#version-switcher` 内、`st-` 前缀；`?inline` 注入，不污染三版全局样式 |
+| `versions/shared/switcher.js` | 创建左上角按钮，点击 `location.assign()`；鼠标移开 3 秒自动淡出、移回热区或键盘聚焦即恢复 | 不 import 任何 `vX` 代码、不依赖 Vue；挂载到独立 `#version-switcher` 节点；带 `stMounted` 防重复；触屏禁用自动隐藏 |
+| `versions/shared/switcher.css` | 切换器样式（左上角定位、`st-hidden` 淡出态、触屏降级） | 全部选择器限定在 `#version-switcher` 内、`st-` 前缀；`?inline` 注入，不污染三版全局样式 |
 | `versions/shared/uno.js` | 唯一 `import 'virtual:uno.css'` | 避免多入口重复导入告警；三版共用一份原子类 |
 
 ### 4.5 配置层
@@ -208,6 +208,7 @@ pnpm preview
 | UnoCSS 覆盖 | `wv`、`f-c-c`、`i-ant-design-user-outlined`（1.0/2.0）与 `i-lucide-map-pin`（3.0）等类名均生成 |
 | 切换逻辑单测 | `/`→v3→v1、`/v1/`→v1→v2、`/v2/`→v2→v3、`/v1/index.html`→v1 全部通过 |
 | 切换器执行确定性 | 由三个 `main.js` 显式 `import '@shared/switcher.js'`，ESM 语义保证执行；未采用 HTML 第二个 module script（多入口构建时执行时机不确定） |
+| 自动隐藏逻辑 | 首屏 3 秒收起、悬停恢复、离开 3 秒再隐藏、键盘聚焦恢复、触屏不启用，DOM 模拟用例全部通过 |
 
 ### 已知事项
 
@@ -215,6 +216,7 @@ pnpm preview
 - 本机 Node 22 低于 `package.json` 要求的 24，构建时仅有 engine 警告，不影响产物。
 - 三个页面共载一份 UnoCSS 原子类 CSS（gzip 约 8.8 KB），是构建期唯一共享的样式；三版 preset 相同，不存在覆盖冲突。
 - 切换为整页跳转，会有一次刷新；这是当前「单按钮」临时形态，后续可平滑替换为无刷新方案。
+- 切换器在左上角，鼠标移开 3 秒后淡出；`#version-switcher` 容器保留为唤出热区，鼠标移回即显示。3.0 的键盘跳转链接 `.skip-link` 聚焦时会从同区域滑入，此时切换器让位以免遮挡焦点。
 
 ## 7. 新增一个版本的步骤
 

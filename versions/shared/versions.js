@@ -6,9 +6,9 @@
  * path 为站点根绝对路径，必须与 vite.config.js 的 rollup input 文件名对应。
  */
 export const VERSIONS = Object.freeze([
-  Object.freeze({ id: 'v1', label: '1.0', name: '线性星轨', path: '/v1/' }),
-  Object.freeze({ id: 'v2', label: '2.0', name: '彩色星轨', path: '/v2/' }),
-  Object.freeze({ id: 'v3', label: '3.0', name: '星轨之下', path: '/' }),
+  Object.freeze({ id: 'v1', label: 'v1', name: '线性星轨', path: '/v1/' }),
+  Object.freeze({ id: 'v2', label: 'v2', name: '彩色星轨', path: '/v2/' }),
+  Object.freeze({ id: 'v3', label: 'v3', name: '星轨之下', path: '/' }),
 ])
 
 /** 由当前 URL 判定所处版本；根路径及其余情况均归入 3.0。 */
