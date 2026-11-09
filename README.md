@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/star.svg" width="80" height="80" alt="Star-Trail · 星轨 标志">
+  <img src="public/v3/star.svg" width="80" height="80" alt="Star-Trail · 星轨 标志">
   <h1>Star-Trail · 星轨</h1>
   <p><strong>让热爱，在星空下相遇。</strong></p>
   <p>以星轨与黄昏为背景的个人主页，把作品、博客和社交入口放在同一片夜空里。</p>
@@ -62,7 +62,7 @@ pnpm lint     # 代码检查
 | 2.0 彩色星轨 | `/v2/` | [versions/v2](versions/v2) | `v2/index.html` |
 | 3.0 星轨之下（当前） | `/` | [versions/v3](versions/v3) | `index.html` |
 
-三个版本各自是独立 HTML 文档，只加载自己的 JS 与全局 CSS；同名文件、同名 DOM id、全局样式和 `window` 事件监听不会互相影响。完整的目录结构、文件来源、路径归属与逐文件变更范围见 [docs/VERSIONS.md](docs/VERSIONS.md)。
+三个版本各自是独立 HTML 文档，只加载自己的 JS 与全局 CSS；同名文件、同名 DOM id、全局样式和 `window` 事件监听不会互相影响。静态资源同样按版本完全隔离：`public/v1/`、`public/v2/`、`public/v3/` 各持一份 favicon 与背景音乐，根目录不再保留跨版本共享素材，任一版本替换素材都不会影响其它版本。完整的目录结构、文件来源、路径归属与逐文件变更范围见 [docs/VERSIONS.md](docs/VERSIONS.md)。
 
 > 配置当前版本内容时，请编辑 `versions/v3/` 下的文件，**不要**改动 `versions/v1/`、`versions/v2/`（历史快照）。
 
@@ -80,7 +80,7 @@ pnpm lint     # 代码检查
 | 博客与联系方式 | [versions/v3/data.js](versions/v3/data.js) | `blogs`、`socialLinks` |
 | 页面文案 | [versions/v3/App.vue](versions/v3/App.vue) | 页面结构与静态文案 |
 | 站点标题、统计 | [index.html](index.html) | HTML 元信息及 51.la 脚本 |
-| 公共素材 | [public](public) | 图标、音乐、星空和黄昏背景 |
+| 公共素材 | [public](public) | 按版本分区：`public/v3/` 放当前版本的图标、音乐、星空和黄昏背景 |
 
 `effects.comet` 当前为 `true`。`effects.sky` 包含视角、轴心、弧段、星轨数量、帧率与彗星尾迹等参数，桌面端与移动端可分别调整。建议先修改内容，再小幅调整视觉参数。
 
@@ -147,6 +147,6 @@ docker build -f docker/Dockerfile.2.0-remake -t 01petard/blog-star-trail:2.0-rem
 
 ## 参考与反馈
 
-页面设计参考 [哞菇 / Nekotora · fLaG.Moe](https://flag.moe/)。背景音乐《夢燈籠》来自 RADWIMPS，黄昏插画与《你的名字》相关；代码与第三方音乐、图片的使用权限应分别确认。字体许可见 [MaShanZheng-OFL.txt](public/v3/scenery/MaShanZheng-OFL.txt)。
+页面设计参考 [哞菇 / Nekotora · fLaG.Moe](https://flag.moe/)。背景音乐《夢燈籠》来自 RADWIMPS，黄昏插画与《你的名字》相关；代码与第三方音乐、图片的使用权限应分别确认。字体许可见 [MaShanZheng-OFL.txt](public/v3/MaShanZheng-OFL.txt)。
 
 欢迎通过 [Issues](https://github.com/01Petard/star-trail/issues) 反馈问题，附上浏览器、设备尺寸和复现步骤。当前仓库未提供项目级 `LICENSE` 文件。

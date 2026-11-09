@@ -214,7 +214,7 @@ onUnmounted(() => {
         About Me
       </div>
       <div>
-        <MiniPlayer src="/mengdenglong.mp3" title="梦灯笼"/>
+        <MiniPlayer src="/v2/mengdenglong.mp3" title="梦灯笼"/>
       </div>
       <div mx-10 mb-10 flex justify-between>
         <div class="text-white/80">

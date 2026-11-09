@@ -11,7 +11,7 @@ export const siteConfig = Object.freeze({
   }),
   music: Object.freeze({
     tracks: Object.freeze([
-      Object.freeze({ src: '/mengdenglong.mp3', title: '夢燈籠', artist: 'RADWIMPS', cover: '/v3/scenery/music_cover.jpg' }),
+      Object.freeze({ src: '/v3/mengdenglong.mp3', title: '夢燈籠', artist: 'RADWIMPS', cover: '/v3/music_cover.jpg' }),
     ]),
   }),
   effects: Object.freeze({
