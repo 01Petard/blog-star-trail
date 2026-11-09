@@ -5,7 +5,7 @@ import { currentVersionId, findVersion, nextVersion } from './versions.js'
  * 版本切换器（临时单按钮形态）。
  *
  * 独立性保证：
- * - 不 import 任何 versions/v1|v2|v3 代码，不依赖 Vue / UnoCSS；
+ * - 不 import 任何 v1|v2|v3 代码，不依赖 Vue / UnoCSS；
  * - 由各版本 main.js 以一行 import 引入，但挂载到独立的 #version-switcher 节点，
  *   与页面自身的 Vue 应用是两棵互不交叉的树；
  * - 样式以 ?inline 注入，全部选择器限定在 #version-switcher 内，不污染版本页面。

@@ -6,10 +6,11 @@ export default defineConfig({
     // 三个入口共用一份原子类 CSS（preset 相同、原子类语义一致，不会互相覆盖）。
     // 显式扫描全部版本源码，保证 v-html 字符串里的图标类名也能被生成。
     filesystem: [
-      'versions/**/*.{vue,js,html}',
+      // 三版源码与各自的入口 HTML 都在 vN/ 下；根 index.html 只是跳转页。
+      'v1/**/*.{vue,js,html}',
+      'v2/**/*.{vue,js,html}',
+      'v3/**/*.{vue,js,html}',
       'index.html',
-      'v1/index.html',
-      'v2/index.html',
     ],
     pipeline: {
       // 默认不扫描纯 .js/.ts，data.js 中的图标类名需要额外纳入扫描。

@@ -351,7 +351,7 @@ onUnmounted(() => {
 <template>
   <div ref="playerRef" :inert="!visible || suppressed" :aria-hidden="!visible || suppressed" class="music-block" :class="{ 'is-docked': docked, 'is-near-footer': raised, 'is-dragging': dragging, 'is-hidden': !visible || suppressed }" :style="playerPosition" @pointerenter="holdPlayer" @pointerleave="releasePlayer" @focusin="holdPlayer" @focusout="releasePlayer" @pointerdown="startDrag" @pointermove="moveDrag" @pointerup="endDrag" @pointercancel="endDrag" @lostpointercapture="endDrag">
     <div class="music-player liquid-glass" role="group" aria-label="背景音乐播放器">
-      <img class="album-art" :src="currentTrack.cover || '/v3/music_cover.jpg'" alt="" width="32" height="32" draggable="false">
+      <img class="album-art" :src="currentTrack.cover || '/v3/img/music_cover.jpg'" alt="" width="32" height="32" draggable="false">
       <div class="track-name">
         <strong>{{ currentTrack.title }}</strong><span>{{ muted && isPlaying ? '静音播放' : currentTrack.artist || 'RADWIMPS' }}</span>
       </div>

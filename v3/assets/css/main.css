@@ -109,7 +109,7 @@ input {
 }
 .hero-backdrop {
   z-index: -4;
-  background: url('/v3/sky-reference.webp') center / cover;
+  background: url('/v3/img/sky-reference.webp') center / cover;
   filter: brightness(0.82) saturate(0.94);
 }
 .sky-effects {
@@ -294,13 +294,13 @@ input[type='range']::-moz-range-thumb {
   background:
     radial-gradient(ellipse at 85% 48%, #72598235, transparent 60%),
     linear-gradient(180deg, #0d142b 0%, #0d142be0 36%, #13192d50 62%, transparent 90%),
-    url('/v3/dusk.webp') center bottom / 100% auto no-repeat,
+    url('/v3/img/dusk.webp') center bottom / 100% auto no-repeat,
     #0d142b;
 }
 .content-wrap {
   position: relative;
   padding-top: calc(14 * var(--u));
-  background: url('/v3/speckles.svg') center / 900px 550px;
+  background: url('/v3/img/speckles.svg') center / 900px 550px;
 }
 h2 {
   font-size: calc(22 * var(--u));
@@ -673,7 +673,7 @@ h2 > button:hover {
   .lower-scene {
     background:
       linear-gradient(to top, transparent 0, #0d142b00 400px, #0d142b 580px),
-      url('/v3/dusk.webp') center bottom / auto 580px no-repeat,
+      url('/v3/img/dusk.webp') center bottom / auto 580px no-repeat,
       #0d142b;
   }
   .social-grid > a {
@@ -832,7 +832,7 @@ h2 > button:hover {
   .lower-scene {
     background:
       linear-gradient(to top, transparent 0, #0d142b00 340px, #0d142b 500px),
-      url('/v3/dusk.webp') center bottom / auto 500px no-repeat,
+      url('/v3/img/dusk.webp') center bottom / auto 500px no-repeat,
       #0d142b;
   }
   .footer-signature {
@@ -1232,7 +1232,7 @@ body::-webkit-scrollbar {
   height: clamp(640px, 65vw, 1000px);
   max-height: 100%;
   pointer-events: none;
-  background: url('/v3/dusk.webp') center bottom / cover no-repeat;
+  background: url('/v3/img/dusk.webp') center bottom / cover no-repeat;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #00000018 20%, #00000085 50%, #000 85%);
   mask-image: linear-gradient(to bottom, transparent, #00000018 20%, #00000085 50%, #000 85%);
 }

@@ -167,7 +167,7 @@ onUnmounted(() => {
             <span /><span /><span />
           </div>
         </div>
-        <img src="/v3/quote-hero.svg" class="opening-quote" alt="即使身处黑暗，也要向着光而行" width="350" height="140">
+        <img src="/v3/img/quote-hero.svg" class="opening-quote" alt="即使身处黑暗，也要向着光而行" width="350" height="140">
         <a class="explore-link" :class="{ 'is-still': scrolled || pageHidden }" href="#about" aria-label="向下探索内容"><i class="i-lucide-chevron-down" aria-hidden="true" /><span>向下探索</span></a>
       </div>
     </section>
@@ -235,7 +235,7 @@ onUnmounted(() => {
         </div>
       </div>
       <section class="reunion" aria-label="黄昏中伸手相见的两个人">
-        <img src="/v3/quote-footer.svg" class="footer-signature" alt="你的名字，是我见过最美的光" width="350" height="140" loading="lazy">
+        <img src="/v3/img/quote-footer.svg" class="footer-signature" alt="你的名字，是我见过最美的光" width="350" height="140" loading="lazy">
         <footer ref="footerElement" class="site-footer content-container">
           <p class="footer-motto">
             <i class="i-lucide-map-pin" aria-hidden="true" /><span>路虽远行则将至，事虽难做则必成</span><i class="i-lucide-map-pin" aria-hidden="true" />
@@ -247,5 +247,5 @@ onUnmounted(() => {
       </section>
     </div>
   </main>
-  <MiniPlayer src="/v3/mengdenglong.mp3" title="夢燈籠" :tracks="siteConfig.music.tracks" :docked="scrolled" :raised="footerVisible" :suppressed="immersive" />
+  <MiniPlayer src="/v3/audio/mengdenglong.mp3" title="夢燈籠" :tracks="siteConfig.music.tracks" :docked="scrolled" :raised="footerVisible" :suppressed="immersive" />
 </template>

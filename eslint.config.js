@@ -25,8 +25,8 @@ export default antfu({
   ignores: [
     './fixtures',
     // 1.0 / 2.0 是历史版本快照，保持原始代码风格，不参与格式化与静态检查。
-    './versions/v1/**',
-    './versions/v2/**',
+    './v1/**',
+    './v2/**',
     // ...globs
   ],
 

@@ -214,7 +214,7 @@ onUnmounted(() => {
         About Me
       </div>
       <div>
-        <MiniPlayer src="/v2/mengdenglong.mp3" title="梦灯笼"/>
+        <MiniPlayer src="/v2/audio/mengdenglong.mp3" title="梦灯笼"/>
       </div>
       <div mx-10 mb-10 flex justify-between>
         <div class="text-white/80">
@@ -337,7 +337,7 @@ onUnmounted(() => {
         aria-label="黄昏中相见的两个人"
       >
         <img
-          src="/v2/yourname.avif"
+          src="/v2/img/yourname.avif"
           alt="黄昏中隔着霞光伸手相见的两个人"
           loading="lazy"
           decoding="async"

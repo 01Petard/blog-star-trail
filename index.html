@@ -2,20 +2,26 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/v3/star.svg" />
-    <link rel="shortcut icon" href="/v3/star.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0d142b" />
-    <meta name="description" content="小黄同学的个人主页：在星轨之下，记录编程、AI 应用与创意项目，分享技术与生活。" />
     <title>热爱可抵岁月漫长</title>
-    <script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script>
+    <meta
+      name="description"
+      content="小黄同学的个人主页：在星轨之下，记录编程、AI 应用与创意项目，分享技术与生活。"
+    />
+    <!--
+      根路径只做一件事：跳到「最新版本」。
+      跳转目标由 vite.config.js 读取 shared/versions.js 的 VERSIONS 最后一项注入，
+      新增版本时无需改动本文件。
+    -->
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="0; url=__LATEST_VERSION__" />
     <script>
-      window.LA?.init({ id: '3HTdvOqsAGXYoW12', ck: '3HTdvOqsAGXYoW12' })
+      location.replace('__LATEST_VERSION__')
     </script>
   </head>
   <body>
-    <div id="app"></div>
-    <div id="version-switcher"></div>
-    <script type="module" src="/versions/v3/main.js"></script>
+    <p>
+      正在前往最新版本，若没有自动跳转请点击<a href="__LATEST_VERSION__">这里</a>。
+    </p>
   </body>
 </html>
