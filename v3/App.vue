@@ -1,5 +1,7 @@
 <script setup>
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { cardColors } from '@v3/card-colors'
+import CardIcon from '@v3/components/CardIcon.vue'
 import MiniPlayer from '@v3/components/MiniPlayer.vue'
 import ProjectCard from '@v3/components/ProjectCard.vue'
 import StarTrails from '@v3/components/StarTrails.vue'
@@ -217,8 +219,8 @@ onUnmounted(() => {
               </h2>
             </div>
             <div class="blog-grid social-grid">
-              <a v-for="blog in blogs" :key="blog.link" class="liquid-glass" :href="blog.link" target="_blank" rel="noopener noreferrer">
-                <span class="social-icon" :class="blog.color" aria-hidden="true"><i :class="blog.icon" /></span><span class="blog-copy">{{ blog.title }}<small>{{ blog.description }}</small></span>
+              <a v-for="blog in blogs" :key="blog.link" class="liquid-glass" :style="cardColors[blog.icon]" :href="blog.link" target="_blank" rel="noopener noreferrer">
+                <CardIcon :name="blog.icon" /><span class="blog-copy">{{ blog.title }}<small>{{ blog.description }}</small></span>
               </a>
             </div>
           </section>

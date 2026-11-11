@@ -374,17 +374,6 @@ h2 > button:hover {
   border-color: #b2b6f175;
   background: #363958d1;
 }
-.project-icon {
-  width: calc(37 * var(--u));
-  height: calc(37 * var(--u));
-  border-radius: calc(9 * var(--u));
-  display: grid;
-  place-items: center;
-}
-.project-icon i {
-  width: calc(25 * var(--u));
-  height: calc(25 * var(--u));
-}
 .project-card h3 {
   font-size: calc(13 * var(--u));
   font-weight: 500;
@@ -785,10 +774,6 @@ h2 > button:hover {
     grid-template-columns: 39px minmax(0, 1fr);
     padding: 15px;
     gap: 11px;
-  }
-  .project-icon {
-    width: 39px;
-    height: 39px;
   }
   .project-card h3 {
     font-size: 14px;
@@ -1275,16 +1260,6 @@ body::-webkit-scrollbar {
   column-gap: 12px;
   row-gap: 12px;
   align-items: start;
-}
-.project-icon {
-  grid-area: icon;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-}
-.project-icon i {
-  width: 28px;
-  height: 28px;
 }
 .project-copy {
   grid-area: copy;

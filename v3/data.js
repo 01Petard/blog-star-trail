@@ -278,16 +278,14 @@ export const blogs = [
     description: '个人知识库，学习与随笔',
     link: 'https://01petard.github.io/blog-vue-vitepress/',
     action: '迎接未来',
-    icon: 'i-lucide-book-open',
-    color: 'blue'
+    icon: 'CODE_BLOG',
   },
   {
     title: '花火の红玉宫',
     description: '旧时博客与过往记录',
     link: 'https://01petard.github.io/',
     action: '回到过去',
-    icon: 'i-lucide-notebook-pen',
-    color: 'pink'
+    icon: 'ARCHIVE_BLOG',
   },
 ]
 
