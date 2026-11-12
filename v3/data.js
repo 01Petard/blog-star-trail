@@ -96,7 +96,7 @@ export const categories = [
         ],
       },
       {
-        name: '仿GPT风格 Agent 原型演示',
+        name: '仿GPT风格 Agent 原型',
         description: 'AI 应用功能演示，需部署后使用',
         url: 'https://chat.bugstack.top/',
         icon: 'AI',
@@ -107,7 +107,7 @@ export const categories = [
         ],
       },
       {
-        name: 'Agent 运行可视化技术验证',
+        name: 'Agent 运行可视化',
         description: '配置智能体，编排工作流',
         url: 'https://github.com/01Petard/ai-agent-station-web/',
         icon: 'AG',
