@@ -1,5 +1,9 @@
 /**
- * 版本清单 —— 全站唯一维护点。
+ * [INPUT]: 读取浏览器路径，按 Vite 多入口的路径约定定义版本。
+ * [OUTPUT]: 提供版本清单、当前版本查找和下一个版本查找。
+ * [POS]: 为根路径跳转和版本切换器提供版本顺序。
+ * [PROTOCOL]: Update this header on change, then check AGENTS.md
+ *
  * 新增版本时：建 vX/index.html + vX/ 源码 + vite.config.js 的 entries，
  * 再在此数组补一项即可，无需改动任何已有版本的代码。
  *

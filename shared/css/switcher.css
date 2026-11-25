@@ -1,6 +1,9 @@
-/* 切换器样式：所有选择器限定在 #version-switcher 内，类名统一 st- 前缀。
-   三个版本的 main.css 都含全局 * / body / button 规则，因此这里把关键属性写全，
-   靠 #id 的高特异性保证不受任何版本样式影响，也不会反向污染它们。 */
+/*
+ * [INPUT]: 匹配 ../js/switcher.js 挂载的按钮及其子元素。
+ * [OUTPUT]: 提供左上角固定布局、悬停和键盘焦点样式。
+ * [POS]: 由 ../js/switcher.js 内联注入，样式限定在 #version-switcher 内。
+ * [PROTOCOL]: Update this header on change, then check AGENTS.md
+ */
 #version-switcher {
   position: fixed;
   top: 20px;
@@ -35,9 +38,7 @@
   cursor: pointer;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.28s ease, transform 0.28s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.28s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 #version-switcher .st-switcher:hover {
@@ -49,14 +50,6 @@
 #version-switcher .st-switcher:focus-visible {
   outline: 2px solid #c2c2ff;
   outline-offset: 2px;
-}
-
-/* 自动隐藏：淡出并向左收起。容器 #version-switcher 不隐藏、尺寸不变，
-   继续充当鼠标唤出热区；按钮仍保留在 Tab 顺序中，键盘聚焦可唤出。 */
-#version-switcher .st-switcher.st-hidden {
-  opacity: 0;
-  transform: translateX(-14px);
-  pointer-events: none;
 }
 
 #version-switcher .st-badge {
@@ -108,15 +101,6 @@ body:has(.skip-link:focus) #version-switcher .st-switcher {
 
   #version-switcher .st-name {
     display: none;
-  }
-}
-
-/* 触屏没有 hover，隐藏后将无法唤出，因此永久显示。 */
-@media (hover: none), (pointer: coarse) {
-  #version-switcher .st-switcher.st-hidden {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
   }
 }
 

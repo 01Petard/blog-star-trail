@@ -1,3 +1,9 @@
+<!--
+[INPUT]: 使用星轨组件、播放器与共享背景音乐。
+[OUTPUT]: 渲染星轨之下页面。
+[POS]: 由 v3/main.js 挂载的根组件。
+[PROTOCOL]: Update this header on change, then check AGENTS.md
+-->
 <script setup>
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { cardColors } from '@v3/card-colors'
@@ -249,5 +255,5 @@ onUnmounted(() => {
       </section>
     </div>
   </main>
-  <MiniPlayer src="/v3/audio/mengdenglong.mp3" title="夢燈籠" :tracks="siteConfig.music.tracks" :docked="scrolled" :raised="footerVisible" :suppressed="immersive" />
+  <MiniPlayer src="/shared/audio/mengdenglong.mp3" title="夢燈籠" :tracks="siteConfig.music.tracks" :docked="scrolled" :raised="footerVisible" :suppressed="immersive" />
 </template>

@@ -1,3 +1,9 @@
+/**
+ * [INPUT]: 读取版本清单、HTML 入口和站点静态资源。
+ * [OUTPUT]: 构建多入口站点，注入根路径跳转并复制静态资源。
+ * [POS]: 为各版本提供 URL、构建产物和源码别名。
+ * [PROTOCOL]: Update this header on change, then check AGENTS.md
+ */
 import { cpSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
@@ -6,7 +12,7 @@ import UnoCSS from 'unocss/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
-import { VERSIONS } from './shared/versions.js'
+import { VERSIONS } from './shared/js/versions.js'
 
 // 一律相对本配置文件解析，避免 cwd 差异导致路径漂移。
 const at = p => fileURLToPath(new URL(p, import.meta.url))
@@ -46,11 +52,8 @@ function latestVersionRedirect() {
 }
 
 /**
- * 每个版本的静态资源（img / audio / assets）跟着版本目录走，不再放 public/。
- *
- * 它们不是模块、也没有被 import，Vite 不会自动产出，因此构建后原样复制到 dist/vN/。
- * 只复制 vN/assets 下的顶层文件：vN/assets/css 是源码样式，已由 JS 打包进 dist/assets。
- * dev 下无需处理，Vite 直接以项目根为静态根提供 /vN/img/... 等路径。
+ * 按源码路径复制版本静态资源和共享音频，保持开发与生产的访问路径一致。
+ * vN/assets 只复制顶层文件，源码样式由 Vite 打包。
  */
 function copyVersionStatic() {
   const outDir = at('./dist')
@@ -59,8 +62,10 @@ function copyVersionStatic() {
     name: 'star-trail:copy-version-static',
     apply: 'build',
     closeBundle() {
+      cpSync(at('./shared/audio'), path.join(outDir, 'shared', 'audio'), { recursive: true })
+
       for (const { id } of VERSIONS) {
-        for (const dir of ['img', 'audio', 'assets']) {
+        for (const dir of ['img', 'assets']) {
           const from = at(`./${id}/${dir}`)
           if (!existsSync(from))
             continue

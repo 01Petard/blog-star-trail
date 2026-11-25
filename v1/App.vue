@@ -1,3 +1,9 @@
+<!--
+[INPUT]: 使用星轨组件、播放器与共享背景音乐。
+[OUTPUT]: 渲染线性星轨页面。
+[POS]: 由 v1/main.js 挂载的根组件。
+[PROTOCOL]: Update this header on change, then check AGENTS.md
+-->
 <script setup>
 import {onMounted, reactive} from 'vue'
 import MiniPlayer from '@v1/components/MiniPlayer.vue'
@@ -150,7 +156,7 @@ onMounted(() => {
         About Me
       </div>
       <div>
-        <MiniPlayer src="/v1/audio/mengdenglong.mp3" title="梦灯笼" />
+        <MiniPlayer src="/shared/audio/mengdenglong.mp3" title="梦灯笼" />
       </div>
       <div mx-10 mb-10 flex justify-between>
         <div class="text-white/80">

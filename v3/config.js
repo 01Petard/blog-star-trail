@@ -1,3 +1,9 @@
+/**
+ * [INPUT]: 引用头像、共享音乐与播放器封面。
+ * [OUTPUT]: 提供头像、曲目和星空效果配置。
+ * [POS]: 为 3.0 页面与星空渲染提供配置。
+ * [PROTOCOL]: Update this header on change, then check AGENTS.md
+ */
 export const siteConfig = Object.freeze({
   profile: Object.freeze({
     // 切换为 'anya' 即可使用另一张头像，保留老博客的两份素材。
@@ -11,7 +17,7 @@ export const siteConfig = Object.freeze({
   }),
   music: Object.freeze({
     tracks: Object.freeze([
-      Object.freeze({ src: '/v3/audio/mengdenglong.mp3', title: '夢燈籠', artist: 'RADWIMPS', cover: '/v3/img/music_cover.jpg' }),
+      Object.freeze({ src: '/shared/audio/mengdenglong.mp3', title: '夢燈籠', artist: 'RADWIMPS', cover: '/v3/img/music_cover.jpg' }),
     ]),
   }),
   effects: Object.freeze({
